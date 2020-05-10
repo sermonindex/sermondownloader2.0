@@ -1,0 +1,255 @@
+body {
+    background-color: #7b7b41 !important;
+    /* border: 6px solid #00000069; */
+}
+
+.leftmenu {
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 250px;
+    margin-left: 0px;
+    background-color: rgba(240,240,240,.5);
+}
+
+.speakermenu {
+    /* background-color: #7a7a4b; */
+    height: 100%;
+}
+
+.app-header {
+    margin-bottom: 15px;
+    /* background-image: url('../images/sermonindex-logo1.png');
+    background-repeat: no-repeat; */
+    /*background-color: #34442b;*/
+    /* background-color: #00000069; */
+    background-color: #7b7b41 !important;
+}
+
+.logoLine1 {
+    background-color: white;
+    color: #00000069;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.app-title {
+    color: whitesmoke;
+}
+
+.section-title {
+    background-color:#00000069;
+    color: whitesmoke;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    /* height: 40px;
+    padding-top: 7px; */
+}
+
+.boxlook {
+    border: 3px solid #00000069;
+}
+
+#tblSpeakers td {
+    padding: .75rem;
+    vertical-align: middle !important;
+    border-top: 0px !important;
+    line-height: .1rem;
+}
+
+#tblSpeakers td:hover {
+    background-color: #00000069;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+#tblSermons td {
+    border-top: 0px;
+}
+
+#tblSermons thead th
+{
+    background-color: #5c5c37;    
+    border-bottom: 0px;
+    border-top: 0px;
+    position: sticky;
+    top:0;
+}
+
+#tblSermons tbody tr:hover {
+    background-color: rgba(245, 245, 245, 0.2);
+}
+
+#tblSermons tbody tr:hover td:first-child {
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+.sermon-available {
+    color: rgb(133, 221, 0);
+}
+
+.sermon-downloading {
+    color: rgb(255, 232, 101);
+}
+
+.sermon-failed-download {
+    color: red;
+}
+
+.sermon-nonaudio {
+    color: brown;
+}
+
+.statusBar {
+    color: black;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.alert-play {
+    color: #1a563b;
+    background-color: #d4edda30;
+    border-color: #c3e6cb40;    
+}
+
+#btnDownloadAll .btn {
+    padding: 0px;
+}
+
+.fix-header thead tr:first-child>td{
+    position: sticky;
+    top: 0;
+}
+
+.no-radius {
+    border-radius: 0px !important;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0px !important;
+}
+
+.form-control:focus {
+    color: wheat;
+    background-color: #000000d9;
+    border-color: black;
+    outline: 0;
+}
+
+.sd-control {
+    background-color: #000000d9;
+    border-color: black;
+}
+
+.sd-input {
+    color: wheat;
+    background-color: #000000d9;
+}
+
+.overflow-container {
+    max-height: 400px;
+    overflow-y: scroll;
+    border-left: 1px solid #00000069;
+    border-right: 1px solid #00000069;
+    border-bottom: 1px solid #00000069;
+    margin-top: 0px;
+}
+
+.sermon-overflow-container {
+    max-height: 438px;
+    overflow-y: scroll;
+    border-left: 1px solid #00000069;
+    border-right: 1px solid #00000069;
+    border-bottom: 1px solid #00000069;
+    margin-top: 0px;
+}
+
+.sd-sermon-table {
+    width: 100%;
+}
+
+.infopanel {
+    background-color: #00000069;
+    color: whitesmoke;
+    font-size: 1rem;
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+/* #divInfo {
+    margin-top: 5px;
+} */
+
+footer {
+    max-height: 150px;
+}
+
+.footer-content {
+    color: whitesmoke;
+    font-size: 1rem;
+}
+
+.audio-panel {
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    color: whitesmoke;
+}
+
+#btnStopMedia {
+    margin-top: 5px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 70%;
+  height: 5px;
+  background: #00000069;
+  outline: none;
+  /* opacity: 0.7; */
+  border-radius: 3px;
+}
+
+.slider:hover {
+    cursor: pointer;
+    height: 10px;
+}
+
+/* .slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    background: #495057;
+    border: none;
+    border-radius: 3px;
+} */
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: whitesmoke;
+    margin-top: -1px; 
+}
+
+.slider::-webkit-slider-thumb:hover {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin-top: -2;
+    background-color: black;
+    border: 1px solid whitesmoke;
+}
+
+.audiostatus {
+    width:100%;
+    text-align: left !important;
+    font-size: 1.2rem;
+    color: black;
+}

@@ -1,0 +1,44 @@
+{
+  "name": "sermon-downloader-2.0",
+  "productName": "Sermon Downloader 2.0",
+  "version": "2.0.0",
+  "description": "Sermon downloader is offered by sermonindex.net. This is a free to use and distribute. The purpose is to provide sermons download in a batch with single click capabilities to the user. It is made available for God's glory. Enjoy and rejoice inthe Lord! IF you liked it please feel free to send a note of encouragement to sermonindex.",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "package-linux": "electron-packager . sermon-downloader-2.0 --overwrite --asar --platform=linux --arch=x64 --icon=images/sermonindex-logo1.png --out=release-builds",
+    "create-debian-installer": "electron-installer-debian --overwrite --src release-builds/sermon-downloader-2.0-linux-x64/ --arch amd64 --config debian.json",
+    "package-mac": "electron-packager . sermon-downloader-2.0 --overwrite --platform=darwin --arch=x64 --out=release-builds",
+    "create-mac-installer": "electron-installer-dmg ./release-builds/sermon-downloader-2.0-darwin-x64/sermon-downloader-2.0.app sermon-downloader-2.0 --out=release-builds --overwrite --icon=images/sermonindex-logo1.icns",
+    "package-win": "electron-packager . sermon-downloader-2.0 --overwrite --asar --platform=win32 --arch=ia32 --icon=images/sermonindex_logo.ico --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Electron Tutorial App'"
+  },
+  "keywords": [
+    "sermondownloader",
+    "sermonindex"
+  ],
+  "author": "Sherebiah Tisbi",
+  "license": "ISC",
+  "devDependencies": {
+    "download": "^8.0.0",
+    "electron": "^8.2.3",
+    "electron-installer-dmg": "^3.0.0",
+    "electron-log": "^4.1.2",
+    "electron-packager": "^14.2.1",
+    "jquery": "^3.5.0"
+  },
+  "dependencies": {
+    "needle": "^2.4.1",
+    "download": "^8.0.0",
+    "jquery": "^3.5.0",
+    "electron-log": "^4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sermonindex/sermondownloader2.0.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sermonindex/sermondownloader2.0/issues"
+  },
+  "homepage": "https://github.com/sermonindex/sermondownloader2.0#readme"
+}

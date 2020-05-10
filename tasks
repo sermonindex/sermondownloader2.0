@@ -1,0 +1,40 @@
+Change log
+Last updated on : 05/06/2020
+============================
+
+1) Add function to check box to download all sermons of speaker. That would be something many would use, with it some have been able to use the software to download ALL sermons to their computer.
+Status:
+    - Done and tested.
+
+2) copyright wording can be at bottom just: ©2002-2020 SermonIndex.net
+Status:
+    - Done and tested
+
+3) can you add green colour to top grey area where logo is across all top. Also at the top take away text and just have on the right: Sermon Downloader 2.0
+Status:
+    - Done and tested
+
+4) If possible to implement image of each speaker at the top that would be great.
+Status:
+    - Written back that I need this data coming from the API to implement this feature
+
+5) just suggestion does not have to change: when I scroll the sermons of a speaker the sermon titles overflow the text of the "status.  topic   title, etc". I will attach a screenshot.
+Status:
+    - Done and tested
+
+6) have a button somewhere that says: Click to open saved sermon folder (which will open the folder where all the sermons are downloaded to so people can easily access them)
+Status:
+    - Done and tested
+    - 05/05/2020 : Greg commented that it should just open file browser and not the file open dialog
+
+Tasks to complete
+=================
+1) Implement file logging (possible use of electron-log package)
+    Status:
+        - 
+2) Implement HTMLMediaElement to show player controls
+3) Implement application configuration for some important confiugration items (possible use of electron-store package)
+4) Implement IRC integration for chat (need to fidn out suitable package)
+5) Progress bar while sermon is downloading
+6) When playing other sermon while one is alredy playing required two clicks
+    Status: Done, tested & verified.

@@ -1,0 +1,11 @@
+{
+    "dest": "release-builds/",
+    "icon": "images/sermonindex-logo1.png",
+    "maintainer":"Sherebiah Tisbi <sherebiahtishbi@gmail.com>",
+    "categories": [
+        "Utility"
+    ],
+    "lintianOverrides": [
+        "changelog-file-missing-in-native-package"
+    ]
+}
