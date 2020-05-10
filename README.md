@@ -6,13 +6,9 @@ This project is developed to provide the easy app based navigation for all sermo
 
 Content to be added.
 
-### Prerequisites
+### System Requirement
 
-None
-
-```
-Give examples
-```
+Any desktop/laptop with Windows 10, MacOS or Linux is enough to install and run this app.
 
 ### Installing
 
@@ -23,8 +19,11 @@ A step by step guide how to install this app
 * Choose the Operating System you want to download the installer for and click on download
 * B1sed on your operating system follow below steps further
 * For Windows
+> Under construction
 * For MacOS
+> Under construction
 * For Linux (Debian)
+> Under construction
 ```
 ## Running the app
 
