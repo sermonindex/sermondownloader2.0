@@ -11,7 +11,7 @@ const fs = require('fs');
 const { ipcRenderer } = require('electron')
 const logger = require('electron-log');
 
-var speakerData, sermonData, speakerFolder, audio, audioDuration, playbar, media, currentMediaLocation;
+var speakerData, sermonData, speakerFolder, audio, audioDuration, playbar, media, currentMediaLocation, menuState;
 // var elemTrack, elemSpeakerSearch, elemSermonSearch, elemSermonStatus, elemSpeakerAlert, elemSpeakerTable, elemSermonTable, elemDownloadAllButton, elemPlayAlert, elemOpenFolderButton, elemCurrentPlayingCell; 
 var elemCurrentPlayingCell, elemMediaButton; 
 var sermonbasepath = os.homedir() + '/SermonIndex_Sermons/';
@@ -32,6 +32,10 @@ $(document).ready(function () {
     $("#divSermonStatus").hide();
     track = $("#mediaBar");
     mediaButton = $('#btnStopMedia');
+    $("#menuBar").removeClass('openmenu').addClass('closemenu');
+    menuState = false;
+    $("#divFadebody").hide();
+    $("#divAbout").hide();
 
     var apiUrl = 'https://api.sermonindex.net/audio/speaker/_sermonindex.json';
     var options = {
@@ -66,6 +70,30 @@ $(document).ready(function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+});
+
+$("#aAbout").click((e) => { 
+    $("#divAbout").show();
+});
+
+$("#btnCloseAbout").click((e) => { 
+    $("#divAbout").hide();
+});
+
+// open menu 
+$("#menuPointer").click((e) => {
+    menuState = !(menuState);
+    $("#menuBar").toggleClass('openmenu closemenu');
+    if (menuState) { 
+        $("#divFadebody").show();
+        e.currentTarget.classList.add('menupointeropen');
+        e.currentTarget.innerHTML = '<i class="fas fa-angle-left">';
+    } else {
+        $("#divFadebody").hide();
+        e.currentTarget.classList.remove('menupointeropen');
+        e.currentTarget.innerHTML = '<i class="fas fa-angle-right">';
+    } 
 });
 
 //handles download all button

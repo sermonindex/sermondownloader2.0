@@ -15,14 +15,49 @@ Change Log      : None
         <link rel="stylesheet" href="css/custom.css">
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="row">
+        <div id="divFadebody"></div>
+        <div id="divAbout" class="aboutpopup">
+            <h3>About Sermonindex</h3>
+            <hr>
+            <p>
+                SermonIndex is not just a website but really has become a movement of believers seeking the 'old paths' (Jeremiah 6:16).
+                This journey of faith weaves through the current state of evangelical Christianity and the passionate preaching of many
+                godly ministers in our day. Many are seeking authenticity, reality and sincerity in the Christian faith. In a day when
+                popular preachers are telling lies (Jeremiah 5:30-31), there is a great renewed desire to find the real Jesus in the
+                midst of the counterfeit. SermonIndex has been able to archive many of the best preaching messages given in the last 50
+                years in audio mp3 form.
+            </p>
+            <p>
+                To explore more please visit <a href="www.sermonindex.net" target="_blank">Sermonindex</a> website.
+            </p>
+            <p>
+                &copy; Sermonindex.net 2002 - 2020
+            </p>
+            <hr>
+            <button id="btnCloseAbout" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="appContainer" class="container-fluid">
+            <div id="menuBar" class="menubar closemenu">
+                <ul>
+                    <li><a id="aAbout">About</a></li>
+                </ul>
+            </div>
+            <div id="menuPointer" class="menupointer">
+                <!-- <span id="menuarrow" class="menuarrow"> -->
+                    <i class="fas fa-angle-right menuarrow"></i>
+                <!-- </span> -->
+            </div>
+            <div id="divAppHeader" class="row">
                 <nav class="navbar col-md-12 app-header">
                     <span><img src="images/sermonidex-top-large-2.png" class="d-inline-block align-top" alt=""></span>
-                    <span class="app-title"><h2>Sermon Downloader 2.0</h2></span>
+                    <span class="app-title">
+                        <h2>Sermon Downloader 2.0</h2>
+                    </span>
                 </nav>
             </div>
-            <div class="row">
+            <div id="divSermonArea" class="row">
                 <!-- Speakers listing -->
                 <div class="col col-md-4 speakermenu">
                     <div class="navbar section-title text-center">
@@ -83,7 +118,7 @@ Change Log      : None
                 </div>
             </div>
             <!-- Audio panel  -->
-            <div class="row text-center">
+            <div id="divPlayerControls" class="row text-center">
                 <div class="col-md-12 text-center audio-panel">
                     <div>
                         <span id="spanAudioTitle" class="audiostatus"></span>
@@ -95,9 +130,10 @@ Change Log      : None
                     <span id="spanAudioStatus" class="audiostatus"></span>
                 </div>
             </div>
+
         </div>
         <!-- footer -->
-        <footer>
+        <footer id="footerArea">
             <div class="fixed-bottom">
                 <div class="col-md-12 footer-content">
                     &copy; Sermonindex.net 2002 - 2020

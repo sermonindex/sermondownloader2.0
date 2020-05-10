@@ -3,14 +3,93 @@ body {
     /* border: 6px solid #00000069; */
 }
 
-.leftmenu {
+#divFadebody {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #3030199a;
+    position: fixed;
+    z-index: 1;
+    transition: 0.8s;
+}
+
+.menubar {
     height: 100%;
     top: 0;
     left: 0;
     position: fixed;
     width: 250px;
     margin-left: 0px;
-    background-color: rgba(240,240,240,.5);
+    background-color: rgba(0,0,0,.8);
+    padding-top: 15px;
+    padding-left: 15px;
+    z-index: 1;
+}
+
+.menubar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+    margin-left: 30px;
+    font-size: 1.5rem;
+}
+
+.menubar a {
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    display: block;
+    color: #7b7b41;
+}
+
+.menubar a:hover {
+    color: whitesmoke;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.menupointer {
+    height: 20px;
+    width:15px;
+    top: 0;
+    left:0;
+    position: fixed;
+    margin-left: 0px;
+    margin-top: 1px;
+    background-color: rgba(0,0,0,.8);
+    /* border: 2px solid whitesmoke; */
+    border-left: none;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    color: whitesmoke;
+    z-index: 2;
+    transition: margin-left 0.3s;
+    padding-left: 2px;
+}
+
+.menupointeropen {
+    margin-left: 250px;
+    transition: 0.3s;
+}
+
+.menupointer:hover {
+    cursor: pointer;
+}
+
+.menuarrow {
+    bottom: 50%;
+}
+
+.openmenu {
+    margin-left: 0px;
+    transition: 0.3s;
+}
+
+.closemenu {
+    margin-left: -250px;
+    transition: 0.3s;
 }
 
 .speakermenu {
@@ -253,3 +332,23 @@ footer {
     font-size: 1.2rem;
     color: black;
 }
+
+.aboutpopup {
+    /* height: 75%; */
+    width: 65%;
+    margin-left: 350px;
+    margin-top: 200px;
+    -webkit-box-shadow: 10px 10px 51px -19px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 51px -19px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 51px -19px rgba(0,0,0,0.75);    
+    position: fixed;
+    background-color: rgb(51, 51, 51); 
+    color: whitesmoke;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+
+
+
