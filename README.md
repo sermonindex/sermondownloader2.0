@@ -17,19 +17,15 @@ A step by step guide how to install this app
 ```
 * Visit the sermonindex.net and go to download section.
 * Choose the Operating System you want to download the installer for and click on download
-* B1sed on your operating system follow below steps further
+* Based on your operating system follow below steps further
+```
 #### For Windows
-```
 > Under construction
-```
 #### For MacOS
-```
 > Under construction
-```
 #### For Linux (Debian)
-```
 > Under construction
-```
+
 ## Running the app
 
 ### For Windows
