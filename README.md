@@ -68,5 +68,5 @@ This project is licensed under the ISC License.
 
 * Bro. Greg Gordon for constant support in testing and constant encouragement.
 * Bro. Llywan for APIs.
-* Yarusha Tishbi - my beloved wife for providing all moral support and bearing with me while I do not listen to her calls for breakfast/lunch/dinne! :blush:
+* Yarusha Tishbi - my beloved wife for providing all moral support and bearing with me while I do not listen to her calls for breakfast/lunch/dinner! :blush:
 * Krupa Tishbi - my beloved daughter for helping me with mathematical operations, obviously I dont know how to calculate the percentage. :blush:
