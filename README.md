@@ -4,7 +4,7 @@ This project is developed to provide the easy app based navigation for all sermo
 
 ## Getting Started
 
-Content to be added.
+> Under construction
 
 ### System Requirement
 
@@ -27,16 +27,22 @@ A step by step guide how to install this app
 > Under construction
 
 ## Running the app
+> Under construction
 
 ### For Windows
+> Under construction
 
 ### For MacOS
+> Under construction
 
 ### For Linux 
+> Under construction
 
 #### Ubuntu/Debian based
+> Under construction
 
 #### Others
+> Under construction
 
 ## Built With
 
@@ -53,8 +59,7 @@ A step by step guide how to install this app
 * [jquery 3.5.0](https://rometools.github.io/rome/) - to perform DOM operations
 
 ## Contributing
-
-Content to be added
+> Under construction
 
 ## Authors
 
@@ -67,6 +72,6 @@ This project is licensed under the ISC License.
 ## Acknowledgments
 
 * Bro. Greg Gordon for constant support in testing and constant encouragement.
-* Bro. Llywan for APIs.
+* Bro. Llewellynvdm for APIs.
 * Yarusha Tishbi - my beloved wife for providing all moral support and bearing with me while I do not listen to her calls for breakfast/lunch/dinner! :blush:
 * Krupa Tishbi - my beloved daughter for helping me with mathematical operations, obviously I dont know how to calculate the percentage. :blush:
