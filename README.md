@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/sermonindex/sermondownloader2.0/master/_app-image.jpg?token=ALBHJD2ZMTAT7RX67TP5AVC6XCBDW">
+<img src="https://raw.githubusercontent.com/sermonindex/audio_api/master/app-image.jpg">
 
 # Sermonindex Player 2.0
 
