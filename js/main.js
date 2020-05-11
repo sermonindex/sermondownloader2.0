@@ -34,8 +34,9 @@ ipcMain.handle('showdialog', async (event, args) => {
 app.on('ready',createWindow);
 
 //Quit the app (main porcess) when all windows are closed
-app.on('window-all-closed', ()=>{
-    if (process.platform != 'darwin'){
-        app.quit();
-    }
+app.on('window-all-closed', () => {
+    app.quit();
+    // if (process.platform != 'darwin'){
+    //     app.quit();
+    // }
 });
