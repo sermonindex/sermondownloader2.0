@@ -17,7 +17,12 @@ Change Log      : None
     <body>
         <div id="divFadebody"></div>
         <div id="divAbout" class="aboutpopup">
-            <h3>About Sermonindex</h3>
+            <div class="modal-header">
+                <h3 class="modal-title">About Sermonindex</h3>
+                <button id="btnCloseAbout" class="btn btn-secondary" aria-label="close" data-toggle="tooltip" data-placement="left" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
             <hr>
             <p>
                 SermonIndex is not just a website but really has become a movement of believers seeking the 'old paths' (Jeremiah 6:16).
@@ -33,10 +38,6 @@ Change Log      : None
             <p>
                 &copy; Sermonindex.net 2002 - 2020
             </p>
-            <hr>
-            <button id="btnCloseAbout" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Close">
-                <i class="fas fa-times"></i>
-            </button>
         </div>
         <div id="appContainer" class="container-fluid">
             <div id="menuBar" class="menubar closemenu">
