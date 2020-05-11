@@ -1,6 +1,6 @@
-<img src="https://raw.githubusercontent.com/sermonindex/sermondownloader2.0/master/_app-image.jpg?token=ALBHJD2ZMTAT7RX67TP5AVC6XCBDW">
+<img src="https://raw.githubusercontent.com/sermonindex/audio_api/master/app-image.jpg">
 
-# Sermonindex Player 2.0
+# Sermonindex Downloader 2.0
 
 This project is developed to provide the easy app based navigation for all sermons available on [sermonindex](sermonindex.net). The goal is to aid users to cate local copy of sermons by downloading them. User has choice to download single or all sermons of a desired speaker. This app is cross platform and should work seamlessly on Windows, MAcOS and Linux (debian) without any issues.
 
