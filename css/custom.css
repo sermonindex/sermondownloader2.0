@@ -167,7 +167,7 @@ body {
     color: whitesmoke;
 }
 
-.sermon-available {
+.playable {
     color: rgb(133, 221, 0);
 }
 
@@ -197,6 +197,10 @@ body {
 
 #btnDownloadAll .btn {
     padding: 0px;
+}
+
+#btnPlayAll {
+    margin-right: 5px;
 }
 
 .fix-header thead tr:first-child>td{

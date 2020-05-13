@@ -86,7 +86,11 @@ Change Log      : None
                                 <i class="fas fa-folder-open"></i>
                             </button> -->
                             <span>&nbsp;</span>
-                            <button id="btnDownloadAll" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="click to download all sermons of this speaker" disabled>
+                            <!-- <button id="btnPlayAll" class="btn btn-secondary" data-toggle="tooltip" data-placement="left"
+                                title="Play all downloaded sermons of this speaker" disabled>
+                                <i class="fas fa-play"></i>
+                            </button> -->
+                            <button id="btnDownloadAll" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Download all sermons of this speaker, once downloaded the icon in the sermon list will change to play icon." disabled>
                                 <i class="fas fa-download"></i>
                             </button>
                         </div>
@@ -98,7 +102,11 @@ Change Log      : None
                         <table id="tblSermons" class="table table-striped">
                             <thead>
                                 <tr width=100%>
-                                    <th width=10%>Status</th>
+                                    <th width=10%  class="text-center" >
+                                        <span>
+                                            <i class='fas fa-play'></i> / <i class='fas fa-download'></i>
+                                        </span>
+                                    </th>
                                     <th width=20%>Topic</th>
                                     <th width=50%>Title</th>
                                     <th width=10%>Format</th>

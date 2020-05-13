@@ -11,7 +11,7 @@ const fs = require('fs');
 const { ipcRenderer } = require('electron')
 const logger = require('electron-log');
 
-var speakerData, sermonData, speakerFolder, audio, audioDuration, playbar, media, currentMediaLocation, menuState;
+var speakerData, sermonData, speakerFolder, audio, audioDuration, playbar, media, currentMediaLocation, menuState, countDownload, countPlayable;
 // var elemTrack, elemSpeakerSearch, elemSermonSearch, elemSermonStatus, elemSpeakerAlert, elemSpeakerTable, elemSermonTable, elemDownloadAllButton, elemPlayAlert, elemOpenFolderButton, elemCurrentPlayingCell; 
 var elemCurrentPlayingCell, elemMediaButton; 
 var sermonbasepath = os.homedir() + '/SermonIndex_Sermons/';
@@ -70,7 +70,22 @@ $(document).ready(function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+    
+    // $(document.body).tooltip({ selector: "[title]" });
+});
 
+$("#btnPlayAll").click((e) => { 
+    // var sermonsFromTable = $("#tblSermons tbody td:first-child");
+    // for (index = 0; index < totalSermons; index++) {
+    //     url = sermonsFromTable[index].dataset['downloadurl'];
+    //     sermonpath = sermonsFromTable[index].dataset['speakerfolder'];
+    //     sermonfilename = sermonsFromTable[index].dataset['filename'];
+    //     sermontitle = sermonsFromTable[index].dataset['sermontitle'];
+
+    //     logger.verbose('>Sermon : ' + url + '\\n>Speaker folder : ' + sermonpath + '\\nSermon filename : ' + sermonfilename + '\\nSermon title : ' + sermontitle);
+
+    //     if (!fs.existsSync(sermonpath + sermonfilename)) { }
+    // }
 });
 
 $("#aAbout").click((e) => { 
@@ -121,13 +136,18 @@ $("#btnDownloadAll").click(function () {
             sermonsFromTable[index].children[0].outerHTML = "<span class='sermon-downloading'>" + spinnerIcon + "</span>";
             downloadSermon(url, sermonpath, sermonfilename, index, sermontitle)
                 .then((res) => {
-                    sermonsFromTable[res.index].children[0].outerHTML = "<span class='sermon-available'>" + playIcon + "</span>";
+                    sermonsFromTable[res.index].children[0].outerHTML = "<span class='playable'>" + playIcon + "</span>";
+                    if (countDownload > 0) {
+                        --countDownload;
+                        $("#btnDownloadAll").html(downloadIcon + " (" + countDownload + ")");
+                    }
+                    ++countPlayable;
                     getMp3Duration(sermonpath + sermonfilename, undefined)
                         .then((duration) => {
                             sermonsFromTable[res.index].parentElement.children[4].innerHTML = duration;
                             logger.info('MP3 duration calculated successfully for > ' + sermonfilename);
                         });
-                    $("#spanPlayAlert").html(successIcon + " completed downloading [" + ++downloadedSermons + " of " + totalSermons + " ]");
+                    $("#spanPlayAlert").html(successIcon + " completed downloading [" + countPlayable + " of " + totalSermons + " ]");
                     logger.info('Downloaded......' + sermonpath);
                 })
                 .catch((err) => {
@@ -216,8 +236,12 @@ function avOrIOaction(e) {
         $("#spanPlayAlert").html(spinnerIcon + " downloading [ " + sermonTitle + " ]");
         downloadSermon(downloadUrl, folderpath, filename, -1,sermonTitle)
             .then((res) => { 
-                e.currentTarget.children[0].outerHTML = "<span class='sermon-available'>" + playIcon + "</span>";
+                e.currentTarget.children[0].outerHTML = "<span class='playable'>" + playIcon + "</span>";
                 $("#spanPlayAlert").html(successIcon + " completed downloading [ " + sermonTitle + " ]");
+                if (countDownload > 0) {
+                    --countDownload;
+                    $("#btnDownloadAll").html(downloadIcon + " (" + countDownload + ")");
+                }
                 getMp3Duration(folderpath + filename, undefined)
                     .then((duration) => {
                         e.currentTarget.parentElement.children[4].innerHTML = duration;
@@ -309,6 +333,7 @@ function downloadSermon(url,folderpath,filename, rowindex, title)
 //Handles the click event of a table cell from Speaker list
 function loadSermons(e) {
     logger.info('loadSermons()->Entered.');
+    
     $("#divSermonStatus").show();
     var speaker = e.currentTarget.attributes['data-speaker'].value;
     var speakerName = e.currentTarget.innerText;
@@ -337,6 +362,8 @@ function loadSermons(e) {
                     $("#tblSermons tbody").html(res);
                     logger.info('Sermons poulated successfully!');
                     var sermonTable = $("#tblSermons tbody");
+                    $("#btnDownloadAll").html(downloadIcon + " (" + countDownload + ")");
+                    // $("#btnPlayAll").html(playIcon + " (" + countPlayable + ")");
                     loadMp3Duration(sermonTable);
                 })
                 .catch(() => {
@@ -431,7 +458,7 @@ function populateSpeakers(txt) {
                 html += "<tr><td data-speaker='" + speaker + "'>" + spkname + "</td></tr>";
             }
         }
-        logger.info('populateSpeakers()->html generated for speaker>'+spkname);
+        // logger.info('populateSpeakers()->html generated for speaker>'+spkname);
     }
     if (html == '') {
         html = "<tr><td>Sorry, No data!</td></tr>";    
@@ -446,6 +473,7 @@ function populateSpeakers(txt) {
 // populate sermons using regular HTML table istead of DataTable
 function populateSermons(searchString) {
     var q = $.Deferred();
+    countPlayable = countDownload = 0;
     logger.info('populateSermons()->Entered.');
     console.log("Rendering sermons...")
     var html = '';
@@ -483,24 +511,28 @@ function populateSermons(searchString) {
 
 function formattedSermonRow(sermon)
 {
-    logger.info('formattedSermonRow()->Entered.');
+    // logger.info('formattedSermonRow()->Entered.');
     var ficon, duration, html;
     var sermontitle = removeQuotes(sermon.title);
     var sermonFilename = formattedSermontitle(sermontitle) + "." + sermon.format;
     var sermonFilepath = speakerFolder + sermonFilename;
 
-    logger.info('formattedSermonRow()->started generating html for sermon>' + sermontitle);
+    // logger.info('formattedSermonRow()->started generating html for sermon>' + sermontitle);
     
     if (fs.existsSync(sermonFilepath)) {
         if (sermon.format == 'mp3') {
-            ficon = "<span class='sermon-available' data-toggle='tooltip' data-placement='bottom' title='Click this icon listen to this sermon.'>" + playIcon + "</span>";
+            ficon = "<span class='playable' data-toggle='tooltip' data-placement='bottom' title='Play'>" + playIcon + "</span>";
+            $("#btnPlayAll").removeAttr('disabled');
+            ++countPlayable;
         } else {
-            ficon = "<span class='sermon-nonaudio' data-toggle='tooltip' data-placement='bottom' title='Can't play this sermon.>" + pdfIcon + "</span>";
+            ficon = "<span class='sermon-nonaudio' data-toggle='tooltip' data-placement='bottom' title='This is not an audio format so can't play this sermon.>" + pdfIcon + "</span>";
         }
         //duration = getMp3Duration(sermonFilepath);
     } else {
-        ficon = "<span data-toggle='tooltip' data-placement='bottom' title='Click this icon to download this sermon.'>" + downloadIcon + "</span>";
+        ficon = "<span data-toggle='tooltip' data-placement='bottom' title='Download'>" + downloadIcon + "</span>";
+        // ficon = "<span data-toggle='tooltip' data-placement='bottom' title='Click this icon to download this sermon.'>" + downloadIcon + "</span>";
         $("#btnDownloadAll").removeAttr('disabled');
+        ++countDownload;
     }
     var html = "";
     html += "<tr>";
@@ -510,18 +542,18 @@ function formattedSermonRow(sermon)
     html += "<td>" + sermon.format + "</td>";
     html += "<td>0.00</td>";
     html += "</tr>";
-    logger.info('formattedSermonRow()->completed generating html for > ' + sermontitle);
-    logger.info('formattedSermonRow()->Exited.');
+    // logger.info('formattedSermonRow()->completed generating html for > ' + sermontitle);
+    // logger.info('formattedSermonRow()->Exited.');
     return html;
 }
 
 //removes all speacial characters and spaces from the sermon title
 function formattedSermontitle(title) {
-    logger.info('formattedSermontitle()->Entered.');
+    // logger.info('formattedSermontitle()->Entered.');
     var newtitle = title.replace(/\s/g, "_");
     newtitle = newtitle.replace(/[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi, '_');
-    logger.info('formattedSermontitle()->title formatted successfully removing all special characters.\\nBefore>'+title+'\\nAfter>'+newtitle);
-    logger.info('formattedSermontitle()->Exited.');
+    // logger.info('formattedSermontitle()->title formatted successfully removing all special characters.\\nBefore>'+title+'\\nAfter>'+newtitle);
+    // logger.info('formattedSermontitle()->Exited.');
     return newtitle;
 }
 
@@ -542,15 +574,15 @@ function removeQuotes(title) {
     newtitle = title.replace(/[&<>"'`=\/]/g, function (s) {
         return entityMap[s];
     });
-    logger.info('removeQuotes()->converetd problametic charcaters to html notations.\\nBefore>'+title+'\\nAfter>'+newtitle);
-    logger.info('removeQuotes()->Exited.');
+    // logger.info('removeQuotes()->converetd problametic charcaters to html notations.\\nBefore>'+title+'\\nAfter>'+newtitle);
+    // logger.info('removeQuotes()->Exited.');
     return newtitle;
 }
 
 //format speaker name in porper case
 function formattedName(name)
 {
-    logger.info('formattedName()->Entered.');
+    // logger.info('formattedName()->Entered.');
     var speakername = '', speakerarray;
     speakerarray = name.split('_');
     // speakerarray.array.forEach(element => {
@@ -559,7 +591,7 @@ function formattedName(name)
     for (index = 0; index < speakerarray.length; index++) {
         speakername += speakerarray[index][0].toUpperCase() + speakerarray[index].slice(1) + ' ';
     } 
-    logger.info('formattedName()->formatted speaker name.\\nBefore>'+name+'\\nAfter>'+speakername);
-    logger.info('formattedName()->Exited.');
+    // logger.info('formattedName()->formatted speaker name.\\nBefore>'+name+'\\nAfter>'+speakername);
+    // logger.info('formattedName()->Exited.');
     return speakername;
 }
