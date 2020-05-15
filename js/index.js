@@ -558,7 +558,7 @@ function formattedSermontitle(title) {
 }
 
 function removeQuotes(title) {
-    logger.info('removeQuotes()->Entered.');
+    // logger.info('removeQuotes()->Entered.');
     var newtitle;
     var entityMap = {
         '&': '&amp;',
