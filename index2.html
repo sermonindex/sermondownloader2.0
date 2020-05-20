@@ -1,0 +1,217 @@
+<!---
+Author          : Sherebiah Tisbi
+Date Written    : 04/27/2020
+Goal            : Main GUI for sermon doanloader
+Change Log      : None 
+-->
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Sermon downloader 2.0</title>
+        <link rel="stylesheet" href="fontawesome/css/all.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/custom.css">
+    </head>
+
+    <body>
+        <div id="divFadebody"></div>
+        <div id="divAbout" class="aboutpopup">
+            <div class="modal-header">
+                <h3 class="modal-title">About Sermonindex</h3>
+                <button id="btnCloseAbout" class="btn btn-secondary" aria-label="close" data-toggle="tooltip"
+                    data-placement="left" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <hr>
+            <p>
+                SermonIndex is not just a website but really has become a movement of believers seeking the 'old paths'
+                (Jeremiah 6:16).
+                This journey of faith weaves through the current state of evangelical Christianity and the passionate
+                preaching of many
+                godly ministers in our day. Many are seeking authenticity, reality and sincerity in the Christian faith.
+                In a day when
+                popular preachers are telling lies (Jeremiah 5:30-31), there is a great renewed desire to find the real
+                Jesus in the
+                midst of the counterfeit. SermonIndex has been able to archive many of the best preaching messages given
+                in the last 50
+                years in audio mp3 form.
+            </p>
+            <p>
+                To explore more please visit <a id="aWebsite" href="www.sermonindex.net" target="_blank">Sermonindex</a> website.
+            </p>
+            <p>
+                &copy; Sermonindex.net 2002 - 2020
+            </p>
+        </div>
+        <div id="appContainer" class="container-fluid">
+            <div id="menuBar" class="menubar closemenu">
+                <ul>
+                    <li><a id="aAbout">About</a></li>
+                </ul>
+            </div>
+            <div id="menuPointer" class="menupointer">
+                <!-- <span id="menuarrow" class="menuarrow"> -->
+                <i class="fas fa-angle-right menuarrow"></i>
+                <!-- </span> -->
+            </div>
+            <div id="divAppHeader" class="row">
+                <nav class="navbar col-md-12 app-header">
+                    <span><img src="images/sermonidex-top-large-2.png" class="d-inline-block align-top" alt=""></span>
+                    <span class="app-title">
+                        <h2>Sermon Downloader 2.0</h2>
+                    </span>
+                </nav>
+            </div>
+            <div id="divSermonArea" class="row">
+                <!-- Speakers/Topics/Playlist listing -->
+                <div class="col col-md-4 speakermenu">
+                    <div id="divCategories" class="catTab">
+                        <ul class="speaker-tab-bar" id="ulCateory" role="tablist">
+                            <li class="cat-item speaker-tab catActive">
+                                <span>Speakers</span>
+                                <span class='tabIcon'><i class='fas fa-user'></i></span>
+                            </li>
+                            <li class="cat-item speaker-tab catInactive">
+                                <span>Topics</span>
+                                <span class='tabIcon'><i class='fas fa-file-alt'></i></span>
+                            </li>
+                            <!-- <li class="cat-item speaker-tab catInactive">
+                                <span>Playlist</span>
+                                <span class='tabIcon'><i class='fas fa-headphones'></i></span>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <div id='divListings' class='catContent'>
+                        <div class="navbar section-title text-center">
+                            <div id="divSpeakerlist" class="navbar-brand">Speakers</div>
+                        </div>
+                        <div class="form-group mb-2 no-bottom-margin">
+                            <input type="text" class="form-control no-radius sd-control sd-input" id="txtsearch"
+                                placeholder="Type here to Search">
+                        </div>
+                        <div class="tab-pane fade show active" id="divSpeakers" role="tabpanel" aria-labelledby="speaker-tab">
+                            <div class="overflow-container">
+                                <table id="tblSpeakers" class="table">
+                                </table>
+                            </div>
+                        </div>
+                        <div id="divSpeakerStatus" class="statusBar">
+                            <div id="divSpeakeralert" class="alert alert-play" role="alert">
+                                <span id="spanSpeakerAlert"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sermons listing -->
+                <div class="col col-md-8">
+                    <div class="navbar section-title text-center">
+                        <div id="divSermonlist" class="navbar-brand">Sermons</div>
+                        <div class="form-inline">
+                            <!-- <button id="btnOpenFolder" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Open sermon folder ">
+                                <i class="fas fa-folder-open"></i>
+                            </button> -->
+                            <span>&nbsp;</span>
+                            <button id="btnPlayAll" class="btn btn-secondary" data-toggle="tooltip" data-placement="left"
+                                title="Play all downloaded sermons of this speaker" disabled>
+                                <i class="fas fa-bars"></i> &nbsp; <i class="fas fa-play"></i>
+                            </button>
+                            <button id="btnDownloadAll" class="btn btn-secondary" data-toggle="tooltip"
+                                data-placement="left"
+                                title="Download all sermons of this speaker, once downloaded the icon in the sermon list will change to play icon."
+                                disabled>
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2 no-bottom-margin">
+                        <input type="text" class="form-control no-radius sd-control sd-input" id="txtsermonsearch"
+                            placeholder="Type here to Search">
+                    </div>
+                    <div id="divSermons" class="overflow-container">
+                        <table id="tblSermons" class="table table-striped">
+                            <thead>
+                                <tr width=100%>
+                                    <th width=10% class="text-center">
+                                        <span>
+                                            <i class='fas fa-play'></i> / <i class='fas fa-download'></i>
+                                        </span>
+                                    </th>
+                                    <th id="cellTopicSpeaker" width=20% class="sortable">
+                                        <span class='sortInactive'><i class='fas fa-sort-alpha-up'></i></span>&nbsp;Topic/Speaker
+                                    </th>
+                                    <th id="cellTitle" width=45% class="sortable">
+                                        <span class='sortActive'><i class='fas fa-sort-alpha-up'></i></span>&nbsp;Title
+                                    </th>
+                                    <th id="cellFormat" width=15% class="sortable">
+                                        <span class='sortInactive'><i class='fas fa-sort-alpha-up'></i></span>&nbsp;Format
+                                    </th>
+                                    <th width=10%>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <audio id="divAudio"></audio>
+                    </div>
+                    <div id="divSermonStatus" class="statusBar text-right">
+                        <div id="divPlayalert" class="alert alert-play" role="alert">
+                            <span id="spanPlayAlert"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Audio panel  -->
+            <div id="divPlayerControls" class="row text-center">
+                <div class="col-md-12 text-center audio-panel">
+                    <div>
+                        <span id="spanAudioTitle" class="audiostatus"></span>
+                    </div>
+                    <!-- <button id="btnStopMedia" class="btn btn-secondary" data-toggle="tooltip" data-placement="left"
+                        disabled>
+                        <i class="fas fa-play"></i>
+                    </button> -->
+                    <input type="range" min="1" max="100" value="0" step="0.3" class="slider" id="mediaBar">
+                    <span id="spanAudioStatus" class="audiostatus"></span>
+                    <div id="divMediaControls">
+                        <button id="btnPrev" class="btn btn-secondary" disabled>
+                            <i class="fas fa-backward"></i>
+                        </button>
+                        <button id="btnStopMedia" class="btn btn-secondary" disabled>
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="btnNext" class="btn btn-secondary" disabled>
+                            <i class="fas fa-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- footer -->
+        <footer id="footerArea">
+            <div class="fixed-bottom">
+                <div class="col-md-12 footer-content text-center">
+                    &copy; Sermonindex.net 2002 - 2020
+                </div>
+            </div>
+        </footer>
+
+        <!-- All scripts linkage -->
+        <script>
+            window.jQuery = window.$ = require('jquery');
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+        <script src="js/index.js"></script>
+    </body>
+
+</html>

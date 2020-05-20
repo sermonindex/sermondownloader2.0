@@ -12,7 +12,7 @@ Change Log  : None
     return;
  }
 
-const { app, BrowserWindow, screen, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, screen } = require('electron');
 var path = require('path');
 var window;
 
@@ -28,16 +28,12 @@ function createWindow() {
         icon:'../images/sermonindex-logo1.png'
     });
     // window.setMenu(null);
-    window.loadFile('index.html');
+    window.loadFile('index2.html');
     //console.log(screen.getPrimaryDisplay());
     //console.log(os.platform());
 }
 
-ipcMain.handle('showdialog', async (event, args) => { 
-    console.log(args);
-    var options = args;
-    dialog.showOpenDialog(window, options);    
-});
+
 
 app.on('ready',createWindow);
 
@@ -48,3 +44,27 @@ app.on('window-all-closed', () => {
     //     app.quit();
     // }
 });
+
+/* DEPRECATED CODE
+// ipcMain.handle('showdialog', async (event, args) => {
+//     console.log(args);
+//     var options = args;
+//     dialog.showOpenDialog(window, options);
+// });
+
+// ipcMain.handle('openthesite', async (event, args) => {
+//     console.log(args);
+//     console.log(args['url']);
+//     switch (process.platform) {
+//         case 'darwin':
+//             machine.execSync('open ' + args['url']);
+//             break;
+//         case 'win32':
+//             machine.execSync('start ' + args['url']);
+//             break;
+//         case 'linux':
+//             machine.execSync('xdg-open www.sermonindex.com');
+//             break;
+//     }
+// });
+*/
