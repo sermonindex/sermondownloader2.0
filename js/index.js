@@ -21,6 +21,7 @@ var sermonbasepath = os.homedir() + '/SermonIndex_Sermons/';
 var playIcon = "<i class='fas fa-play'></i>";
 var pauseIcon = "<i class='fas fa-pause'></i>";
 var downloadIcon = "<i class='fas fa-download'></i>";
+var downloadAllIcon = "<i class='fas fa-bars'></i> &nbsp; <i class='fas fa-download'></i>";
 var spinnerIcon = "<i class='fas fa-cog fa-spin'></i>";
 var folderIcon = "<i class='fas fa-folder-open'></i>";
 var successIcon = "<i class='far fa-check-circle'></i>";
@@ -32,7 +33,8 @@ var iconSortdes = "<i class='fas fa-sort-alpha-down-alt'></i>";
 var iconTopic = "<i class='fas fa-file-alt'></i>"
 var iconLeftArrow = '<i class="fas fa-angle-left">';
 var iconRightArrow = '<i class="fas fa-angle-right">';
-var iconPlayall = '<i class="fas fa-bars"></i> &nbsp; <i class="fas fa-play"></i>';
+var iconPlayallplay = '<i class="fas fa-bars"></i> &nbsp; <i class="fas fa-play"></i>';
+var iconPlayallpause = '<i class="fas fa-bars"></i> &nbsp; <i class="fas fa-pause"></i>';
 
 /* Enums */
 const MEDIA_STATE = { PLAYING: 'playing', PAUSED: 'paused', ENDED: 'ended' ,UNKNOWN: 'unknown'}
@@ -207,7 +209,8 @@ function playAllsermons(e) {
         }
     }
     if (medialist.length > 0) {
-        e.currentTarget.innerHTML = pauseIcon;
+        e.currentTarget.innerHTML = iconPlayallpause;
+        if (elemCurrentPlayingCell != undefined) elemCurrentPlayingCell.innerHTML = playIcon;
         playMedia(medialist[0].filename, medialist[0].sermontitle);
         elemCurrentPlayingCell = medialist[0].domelement;
         currentTrackIndex = 0;
@@ -234,7 +237,7 @@ function playPrevTrack(e) {
 
 // handles nextTrack button
 function playNextTrack(e) {
-    if (medialist.length > 0 && currentTrackIndex < medialist.length -2) {
+    if (medialist.length > 0 && currentTrackIndex < medialist.length - 1) {
         ++currentTrackIndex;
         elemCurrentPlayingCell.innerHTML = playIcon;
         elemCurrentPlayingCell = medialist[currentTrackIndex].domelement;
@@ -278,7 +281,7 @@ function openWebsite(e) {
 // handles download all button
 function downloadAll(e) {
     logger.info('Download All button was pressed.');
-    $("#divSermonStatus").show();
+    // $("#divSermonStatus").show();
     console.log('Will download all sermons now!');
     var sermonsFromTable = $("#tblSermons tbody td:first-child");
     var url, sermonpath, sermonfilename, sermontitle;
@@ -296,14 +299,16 @@ function downloadAll(e) {
         logger.verbose('>Sermon : ' + url + '\\n>Speaker folder : ' + sermonpath + '\\nSermon filename : ' + sermonfilename + '\\nSermon title : ' + sermontitle);
 
         if (!fs.existsSync(sermonpath + sermonfilename)) {
-            $("#spanPlayAlert").html(spinnerIcon + " downloading [ " + totalSermons + " ] sermons");
+            var totalToDownload = countDownload;
+            var completedDownloading = 0;
+            sermonListStatusbar.html(spinnerIcon + " downloading [ " + totalToDownload + " ] sermons");
             sermonsFromTable[index].children[0].outerHTML = "<span class='sermon-downloading'>" + spinnerIcon + "</span>";
             downloadSermon(url, sermonpath, sermonfilename, index, sermontitle)
                 .then((res) => {
                     sermonsFromTable[res.index].children[0].outerHTML = "<span class='playable'>" + playIcon + "</span>";
                     if (countDownload > 0) {
                         --countDownload;
-                        buttonDownloadAll.html(downloadIcon + " (" + countDownload + ")");
+                        buttonDownloadAll.html(downloadAllIcon + " (" + countDownload + ")");
                     }
                     ++countPlayable;
                     getMp3Duration(sermonpath + sermonfilename, undefined)
@@ -311,7 +316,7 @@ function downloadAll(e) {
                             sermonsFromTable[res.index].parentElement.children[4].innerHTML = duration;
                             logger.info('MP3 duration calculated successfully for > ' + sermonfilename);
                         });
-                    $("#spanPlayAlert").html(successIcon + " completed downloading [" + countPlayable + " of " + totalSermons + " ]");
+                    sermonListStatusbar.html(successIcon + " completed downloading [" + ++completedDownloading + " of " + totalToDownload + " ]");
                     logger.info('Downloaded......' + sermonpath);
                 })
                 .catch((err) => {
@@ -499,7 +504,7 @@ function avOrIOaction(e) {
                 sermonListStatusbar.html(successIcon + " completed downloading [ " + sermonTitle + " ]");
                 if (countDownload > 0) {
                     --countDownload;
-                    buttonDownloadAll.html(downloadIcon + " (" + countDownload + ")");
+                    buttonDownloadAll.html(downloadAllIcon + " (" + countDownload + ")");
                 }
                 getMp3Duration(folderpath + filename, undefined)
                     .then((duration) => {
@@ -559,7 +564,7 @@ function setUIEnded(e) {
 function setDuration(e) {
     audioDuration = e.currentTarget.duration;
     track.attr('max', audioDuration);
-    mediaBarTitle.text(sermontitle);
+    if (medialist.length > 0 && currentTrackIndex >= 0) mediaBarTitle.text(medialist[currentTrackIndex].sermontitle);
     elemCurrentPlayingCell.innerHTML = pauseIcon;
 }
 
@@ -573,7 +578,7 @@ function setTimeupdate(e) {
 // updates all media buttons
 function updateMediaInfo(mediastate) {
     mediaButton.html(playIcon);
-    playallButton.html(playIcon);
+    playallButton.html(iconPlayallplay);
     if (elemCurrentPlayingCell!= undefined) elemCurrentPlayingCell.innerHTML = playIcon;            
     buttonPrevTrack.prop('disabled', true);
     buttonNextTrack.prop('disabled', true);
@@ -581,12 +586,12 @@ function updateMediaInfo(mediastate) {
     if (medialist != undefined && medialist.length > 0) {
         (currentTrackIndex == 0) ? buttonPrevTrack.prop('disabled', true) : buttonPrevTrack.prop('disabled', false);
         (currentTrackIndex == medialist.length - 1) ? buttonNextTrack.prop('disabled', true) : buttonNextTrack.prop('disabled', false);
+        (mediastate == MEDIA_STATE.PLAYING) ? playallButton.html(iconPlayallpause) : playallButton.html(iconPlayallplay);
         elemCurrentPlayingCell = medialist[currentTrackIndex].domelement;
     }
 
     if (mediastate == MEDIA_STATE.PLAYING) { 
         mediaButton.html(pauseIcon);
-        playallButton.html(pauseIcon);
         elemCurrentPlayingCell.innerHTML = pauseIcon;
     }
 }
@@ -664,15 +669,18 @@ function loadSermons(e) {
             "Content-Type":"application/json"
         }
     }
+
     needle('get', apiUrl, options)
         .then(function (response) {
             console.log(response);
             sermonData = response.body.sermons;
-            var sermonListTitle = "<h5>Sermons of " + speakerName + " (" + sermonData.length + ")</h5>";
-            $('#divSermonlist').html(sermonListTitle);
             logger.info('loadSermons()->Sermons successfully fetched from sermoindex for speaker>' + speakerName);
             populateSermons('',sermonData)
                 .then((res) => {
+                    var sermonListTitle = (currentTab == 'Speakers')
+                        ? "<h5>" + speakerName + " (" + sermonData.length + ")</h5>"
+                        : "<h5>" + topicName + " (" + sermonData.length + ")</h5>";
+                    $('#divSermonlist').html(sermonListTitle);
                     renderSermonTable(res);
                 })
                 .catch(() => {
@@ -692,7 +700,7 @@ function renderSermonTable(html) {
     $("#tblSermons tbody").html(html);
     logger.info('Sermons poulated successfully!');
     var sermonTable = $("#tblSermons tbody");
-    buttonDownloadAll.html(downloadIcon + " (" + countDownload + ")");
+    buttonDownloadAll.html(downloadAllIcon + " (" + countDownload + ")");
     // $('[data-toggle="tooltip"]').tooltip();
     loadMp3Duration(sermonTable);    
 }
