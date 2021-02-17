@@ -12,12 +12,14 @@ This project is developed to provide the easy app based navigation for all sermo
 
 Any desktop/laptop with Windows 10, MacOS or Linux is enough to install and run this app.
 
+Download links for Operating Systems on <a href="https://www.sermonindex.net/downloader.php">SermonIndex App Page</a>
+
 ### Installing
 
 A step by step guide how to install this app
 
 ```
-* Visit the sermonindex.net and go to <a href="https://www.sermonindex.net/downloader.php">Download section</a>.
+* Visit the sermonindex.net and go to Download section.
 * Choose the Operating System you want to download the installer for and click on download
 * Based on your operating system follow below steps further
 ```
