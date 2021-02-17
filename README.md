@@ -2,7 +2,7 @@
 
 # Sermonindex Downloader 2.0
 
-This project is developed to provide the easy app based navigation for all sermons available on [sermonindex](sermonindex.net). The goal is to aid users to cate local copy of sermons by downloading them. User has choice to download single or all sermons of a desired speaker. This app is cross platform and should work seamlessly on Windows, MAcOS and Linux (debian) without any issues.
+This project is developed to provide the easy app based navigation for all sermons available on <a href="https://www.sermonindex.net">sermonindex</a>. The goal is to aid users to cate local copy of sermons by downloading them. User has choice to download single or all sermons of a desired speaker. This app is cross platform and should work seamlessly on Windows, MAcOS and Linux (debian) without any issues.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ Any desktop/laptop with Windows 10, MacOS or Linux is enough to install and run 
 A step by step guide how to install this app
 
 ```
-* Visit the sermonindex.net and go to download section.
+* Visit the sermonindex.net and go to <a href="https://www.sermonindex.net/downloader.php">Download section</a>.
 * Choose the Operating System you want to download the installer for and click on download
 * Based on your operating system follow below steps further
 ```
