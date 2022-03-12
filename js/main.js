@@ -1,9 +1,15 @@
 /*
-Author      : Sherebiah Tisbi
-Datw Written: 04/27/2020
+Author      : Vincent L
+Date Modified: 3/11/22
 Goal        : Main js for electron app for sermon downloader
-Change Log  : None
+Change Log  : CustomMenu3/11
 */
+
+//Lets App Open Browser Menu
+const {shell} = require('electron')
+const os = require('os');
+const fs = require('fs');
+
 
  //handle setupevents as quickly as possible
  const setupEvents = require('../js/setupEvents');
@@ -12,7 +18,7 @@ Change Log  : None
     return;
  }
 
-const { app, BrowserWindow, screen } = require('electron');
+const { app, BrowserWindow, screen, Menu } = require('electron');
 var path = require('path');
 var window;
 
@@ -27,6 +33,35 @@ function createWindow() {
         },
         icon:'../images/sermonindex-logo1.png'
     });
+
+    //Custom App Menu
+     var menu = Menu.buildFromTemplate([
+    {
+        label: 'Menu',
+            submenu: [
+            {
+                label:'SermonIndex.net',
+                click() { 
+                    shell.openExternal('https://sermonindex.net')
+                } 
+            },
+            {
+                label:'Open Sermon Folder',
+                click(){
+                    shell.openPath(os.homedir() + '/SermonIndex_Sermons/') 
+                }
+            },
+            {type:'separator'}, 
+            {
+                label:'Close App', 
+                click() { 
+                    app.quit() 
+                } 
+            }
+        ]
+    }
+  ])
+  Menu.setApplicationMenu(menu); 
     // window.setMenu(null);
     window.loadFile('index2.html');
     //console.log(screen.getPrimaryDisplay());
@@ -37,7 +72,7 @@ function createWindow() {
 
 app.on('ready',createWindow);
 
-//Quit the app (main porcess) when all windows are closed
+//Quit the app (main process) when all windows are closed
 app.on('window-all-closed', () => {
     app.quit();
     // if (process.platform != 'darwin'){

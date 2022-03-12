@@ -393,7 +393,7 @@ function loadTopics() {
         }
     }
 
-    logger.info('Loadign Topics from sermonindex API.');
+    logger.info('Loading Topics from sermonindex API.');
     $("#spanSpeakerAlert").html(spinnerIcon + ' Loading topics.');
     needle('get', apiUrl, options)
         .then(function (response) {
@@ -403,7 +403,7 @@ function loadTopics() {
 
             var topictitle = iconTopic + " Topics (" + Object.keys(response.body).length + ")";
             $('#divSpeakerlist').html(topictitle);
-            logger.info('Total topics :' + Object.keys(response.body).length + ', now will populating them.');
+            logger.info('Total topics :' + Object.keys(response.body).length + ', now populating them.');
             populateTopics('');
             $("#spanSpeakerAlert").html(successIcon + " " + Object.keys(response.body).length + ' topics loaded.');
         })
@@ -494,7 +494,7 @@ function avOrIOaction(e) {
         }
     } else {
         console.log("Download :" + filepath);
-        logger.info('Sermon [' + sermonTitle + '] do not exist locally so will download.');
+        logger.info('Sermon [' + sermonTitle + '] does not exist locally so will download.');
         // $("#divSermonStatus").show();
         e.currentTarget.children[0].outerHTML = "<span class='sermon-downloading'>" + spinnerIcon + "</span>";
         sermonListStatusbar.html(spinnerIcon + " downloading [ " + sermonTitle + " ]");
@@ -674,7 +674,7 @@ function loadSermons(e) {
         .then(function (response) {
             console.log(response);
             sermonData = response.body.sermons;
-            logger.info('loadSermons()->Sermons successfully fetched from sermoindex for speaker>' + speakerName);
+            logger.info('loadSermons()->Sermons successfully fetched from sermonindex for speaker>' + speakerName);
             populateSermons('',sermonData)
                 .then((res) => {
                     var sermonListTitle = (currentTab == 'Speakers')
@@ -688,9 +688,9 @@ function loadSermons(e) {
                 });
         })
         .catch(function (error) {
-            alert('Error : could not fetch the data from sermnindex.net');
+            alert('Error : could not fetch the data from sermonindex.net');
             console.log(error);
-            logger.error('Error :  could not fetch the data from sermnindex.net > '+ error);
+            logger.error('Error :  could not fetch the data from sermonindex.net > '+ error);
         });
     logger.info('loadSermons()->Exited.');
 }

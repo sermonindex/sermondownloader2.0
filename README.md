@@ -1,18 +1,14 @@
 <img src="https://raw.githubusercontent.com/sermonindex/sermondownloader2.0/master/_app-image.jpg">
 
-# Sermonindex Downloader 2.0
+My personal fork of sermonindex downloader 2.0. Please feel free to take contributions from this repo and integrate it in the main repo.
+
+# SermonIndex-GUI
 
 This project is developed to provide the easy app based navigation for all sermons available on <a href="https://www.sermonindex.net">sermonindex</a>. The goal is to aid users to cate local copy of sermons by downloading them. User has choice to download single or all sermons of a desired speaker. This app is cross platform and should work seamlessly on Windows, MAcOS and Linux (debian) without any issues.
 
 ## Getting Started
 
 > Under construction
-
-### System Requirement
-
-Any desktop/laptop with Windows 10, MacOS or Linux is enough to install and run this app.
-
-Download links for Operating Systems on <a href="https://www.sermonindex.net/downloader.php">SermonIndex App Page</a>
 
 ### Installing
 
@@ -24,7 +20,14 @@ A step by step guide how to install this app
 * Based on your operating system follow below steps further
 ```
 #### For Windows
-> Under construction
+
+Please have node.js installed from https://nodejs.dev/
+## Command Line:
+````
+git clone https://github.com/VincentXE/SermonIndex-GUI
+cd SermonIndex-GUI
+npm install && npm start
+````
 #### For MacOS
 > Under construction
 #### For Linux (Debian)
@@ -52,7 +55,7 @@ A step by step guide how to install this app
 
 #### Basic framework 
 * [node 12.1.0](http://www.dropwizard.io/1.0.2/docs/) - powers the backend
-* [electron 8.2.3](https://maven.apache.org/) - powers the gui
+* [electron 11.5.0](https://maven.apache.org/) - powers the gui
 
 #### Dependencies
 * [needle 2.4.1](https://rometools.github.io/rome/) - to integrate sermonindex web APIs
@@ -67,7 +70,7 @@ A step by step guide how to install this app
 
 ## Authors
 
-* **Sherebiah Tishbi**
+* **Sherebiah Tishbi** for initial code
 
 ## License
 

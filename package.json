@@ -1,7 +1,7 @@
 {
-  "name": "sermondownloader2.0",
-  "productName": "Sermon Downloader 2.0",
-  "version": "2.0.0",
+  "name": "SermonIndex-GUI",
+  "productName": "Redux Sermon Downloader",
+  "version": "1.0",
   "description": "Sermon downloader is offered by sermonindex.net. This is a free to use and distribute. The purpose is to provide sermons download in a batch with single click capabilities to the user. It is made available for God's glory. Enjoy and rejoice inthe Lord! IF you liked it please feel free to send a note of encouragement to sermonindex.",
   "main": "js/main.js",
   "scripts": {
@@ -17,16 +17,15 @@
     "sermondownloader",
     "sermonindex"
   ],
-  "author": "Sherebiah Tisbi",
+  "author": "Vincent L",
   "license": "ISC",
   "devDependencies": {
     "download": "^8.0.0",
-    "electron": "^8.2.3",
-    "electron-installer-debian": "^3.0.0",
+    "electron": "^11.5.0",
     "electron-installer-dmg": "^3.0.0",
     "electron-log": "^4.1.2",
     "electron-packager": "^14.2.1",
-    "electron-winstaller": "^4.0.0",
+    "electron-winstaller": "^5.0.0",
     "jquery": "^3.5.0"
   },
   "dependencies": {
@@ -37,10 +36,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sherebiahtishbi/sermondownloader2.0.git"
+    "url": "git+https://github.com/VincentXE/SermonIndex-GUI"
   },
   "bugs": {
-    "url": "https://github.com/sherebiahtishbi/sermondownloader2.0/issues"
+    "url": "https://github.com/VincentXE/SermonIndex-GUI/issues"
   },
-  "homepage": "https://github.com/sherebiahtishbi/sermondownloader2.0#readme"
+  "homepage": "https://github.com/VincentXE/SermonIndex-GUI#readme"
 }

@@ -1,6 +1,29 @@
 Change log
-Last updated on : 05/06/2020
+Last updated on : 03/11/2022
 ============================
+
+Fixed Various Typos
+
+Added Custom Application Menu Bar
+
+Updated README to include very basic Electron install instructions
+
+NOTE: Cannot compile windows exe for some reason.
+
+Tasks to complete
+=================
+1) Implement file logging (possible use of electron-log package)
+    Status:
+        - 
+2) Implement HTMLMediaElement to show player controls
+3) Implement application configuration for some important confiugration items (possible use of electron-store package)
+4) Implement IRC integration for chat (need to fidn out suitable package)
+5) Progress bar while sermon is downloading
+6) When playing other sermon while one is alredy playing required two clicks
+    Status: Done, tested & verified.
+
+
+Previous Tasks:
 
 1) Add function to check box to download all sermons of speaker. That would be something many would use, with it some have been able to use the software to download ALL sermons to their computer.
 Status:
@@ -27,14 +50,4 @@ Status:
     - Done and tested
     - 05/05/2020 : Greg commented that it should just open file browser and not the file open dialog
 
-Tasks to complete
-=================
-1) Implement file logging (possible use of electron-log package)
-    Status:
-        - 
-2) Implement HTMLMediaElement to show player controls
-3) Implement application configuration for some important confiugration items (possible use of electron-store package)
-4) Implement IRC integration for chat (need to fidn out suitable package)
-5) Progress bar while sermon is downloading
-6) When playing other sermon while one is alredy playing required two clicks
-    Status: Done, tested & verified.
+
