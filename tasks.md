@@ -12,6 +12,8 @@ NOTE: Cannot compile windows exe for some reason.
 
 Tasks to complete
 =================
+0) IMPORTANT::
+ LET USER CHOOSE DOWNLOAD FOLDER
 1) Implement file logging (possible use of electron-log package)
     Status:
         - 
