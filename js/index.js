@@ -646,7 +646,7 @@ function loadSermons(e) {
             var speaker = e.currentTarget.attributes['data-speaker'].value;
             var speakerName = e.currentTarget.innerText;
             speakerFolder = sermonbasepath + speaker + "/";
-            apiUrl = 'https://api.sermonindex.net/audio/speaker/' + speaker + ".json";
+            apiUrl = 'https://vincentw.org/siapi/audio/speaker/' + speaker + ".json";
             console.log(apiUrl);
             logger.info('loadSermons()->Fetching sermons using sermonindex API for speaker >' + speakerName);
             $("#spanPlayAlert").html(spinnerIcon + " Loading Sermons of  > " + speakerName);
@@ -655,7 +655,7 @@ function loadSermons(e) {
         case "Topics":
             var topic = e.currentTarget.attributes['data-topic'].value;
             var topicName = e.currentTarget.innerText;
-            var apiUrl = 'https://api.sermonindex.net/audio/topic/' + topic + '.json';
+            var apiUrl = 'https://vincentw.org/siapi/audio/topic/' + topic + '.json';
             console.log(apiUrl);
             logger.info('loadSermons()->Fetching sermons using sermonindex API for speaker >' + speakerName);
             $("#spanPlayAlert").html(spinnerIcon + " Loading Sermons on  > " + topicName);
