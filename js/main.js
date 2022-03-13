@@ -9,6 +9,9 @@ Change Log  : CustomMenu3/11
 const {shell} = require('electron')
 const os = require('os');
 const fs = require('fs');
+const {dialog} = require('electron')
+const { remote } = require('electron')
+
 
 
  //handle setupevents as quickly as possible
@@ -29,7 +32,9 @@ function createWindow() {
         width: display.bounds.width - 500,
         height: display.bounds.height - 200,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false,
+            devTools: true,
         },
         icon:'../images/sermonindex-logo1.png'
     });
@@ -51,6 +56,23 @@ function createWindow() {
                     shell.openPath(os.homedir() + '/SermonIndex_Sermons/') 
                 }
             },
+            {
+                label:'File Test',
+                click(){
+                    dialog.showOpenDialog({
+                   properties: ['openDirectory']
+                    }).then(result => {
+                   console.log(result.filePaths)
+                   })
+                }
+
+            },
+            {
+                label:'Dev Tools',
+                click(){
+                    createWindow.webContents.toggleDevTools()();
+                }
+            },
             {type:'separator'}, 
             {
                 label:'Close App', 
@@ -60,7 +82,7 @@ function createWindow() {
             }
         ]
     }
-  ])
+  ]) 
   Menu.setApplicationMenu(menu); 
     // window.setMenu(null);
     window.loadFile('index2.html');

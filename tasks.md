@@ -1,14 +1,14 @@
 Change log
-Last updated on : 03/11/2022
+Last updated on : 03/12/2022
+Preparing for 1.0 Release
 ============================
 
-Fixed Various Typos
-
-Added Custom Application Menu Bar
-
-Updated README to include very basic Electron install instructions
-
-NOTE: Cannot compile windows exe for some reason.
+-Uses vincentw.org hosted API
+-Minor CSS changes
+-Fixed Various Typos
+-Added Custom Application Menu Bar
+-Updated README.md to include very basic Electron install instructions
+TOFIX: Compile from win-installer.
 
 Tasks to complete
 =================

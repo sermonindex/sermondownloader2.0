@@ -10,7 +10,7 @@ This project is developed to provide the easy app based navigation for all sermo
 
 > Under construction
 
-### Installing
+### Running The App From Source
 
 A step by step guide how to install this app
 
@@ -26,19 +26,20 @@ Please have node.js installed from https://nodejs.dev/
 ````
 git clone https://github.com/VincentXE/SermonIndex-GUI
 cd SermonIndex-GUI
-npm install && npm start
+npm install
+npm start
 ````
 #### For MacOS
 > Under construction
 #### For Linux (Debian)
 > Under construction
 
-## Running the app
-> Under construction
+## Building the app
 
 ### For Windows
-> Under construction
-
+````
+npx electron-packager .
+````
 ### For MacOS
 > Under construction
 

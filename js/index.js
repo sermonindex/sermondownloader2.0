@@ -386,7 +386,7 @@ function showSermonDescription(e) {
 
 // loads the topics list 
 function loadTopics() {
-    var apiUrl = 'https://api.sermonindex.net/audio/topic/_sermonindex.json';
+    var apiUrl = 'https://vincentw.org/siapi/topic/_sermonindex.json';
     var options = {
         headers: {
             "Content-Type": "application/json"
@@ -418,14 +418,14 @@ function loadTopics() {
 //loads the speakers list
 function loadSpeakers()
 {
-    var apiUrl = 'https://api.sermonindex.net/audio/speaker/_sermonindex.json';
+    var apiUrl = 'https://vincentw.org/siapi/speaker/_sermonindex.json';
     var options = {
         headers: {
             "Content-Type": "application/json"
         }
     }
 
-    logger.info('Loadign speakers from sermonindex API.');
+    logger.info('Loading speakers from sermonindex API.');
     $("#spanSpeakerAlert").html(spinnerIcon + ' Loading Speaker.');
     needle('get', apiUrl, options)
         .then(function (response) {
@@ -464,7 +464,7 @@ function avOrIOaction(e) {
         if (filename.indexOf('mp3') < 0) {
             // alert("This sermon is not in audio format, can't play!");
             openFileExternally(filepath);
-            logger.info('not an autio format.');
+            logger.info('not an audio format.');
             return;
         } else {
             if (elemCurrentPlayingCell != undefined) elemCurrentPlayingCell.innerHTML = playIcon;
