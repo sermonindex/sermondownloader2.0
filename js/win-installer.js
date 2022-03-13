@@ -18,8 +18,8 @@ function getInstallerConfig () {
     authors: 'Sherebiah Tisbi',
     outputDirectory: path.join(outPath, 'windows-installer'),
     noMsi : false,
-    exe: 'sermon-downloader-2.0.exe',
-    setupExe: 'Setup_SermonDownloader2.exe',
+    exe: 'SermonIndexGUI.exe',
+    setupExe: 'SermonindexGUI_Setup.exe',
     setupIcon: path.join(rootPath, 'images','sermonindex-logo.ico')
   })
 }

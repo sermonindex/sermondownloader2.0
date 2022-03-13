@@ -10,7 +10,7 @@ This project is developed to provide the easy app based navigation for all sermo
 
 > Under construction
 
-### Running The App From Source
+### Running The App From sermonindex.net
 
 A step by step guide how to install this app
 
@@ -19,6 +19,9 @@ A step by step guide how to install this app
 * Choose the Operating System you want to download the installer for and click on download
 * Based on your operating system follow below steps further
 ```
+
+### Running App From Source
+
 #### For Windows
 
 Please have node.js installed from https://nodejs.dev/
