@@ -25,7 +25,6 @@ A step by step guide how to install this app
 #### For Windows
 
 Please have node.js installed from https://nodejs.dev/
-## Command Line:
 ````
 git clone https://github.com/VincentXE/SermonIndex-GUI
 cd SermonIndex-GUI
