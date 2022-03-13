@@ -1,7 +1,7 @@
 {
   "name": "SermonIndex-GUI",
   "productName": "SermonIndexGUI",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Sermon downloader is offered by sermonindex.net. This is a free to use and distribute. The purpose is to provide sermons download in a batch with single click capabilities to the user. It is made available for God's glory. Enjoy and rejoice inthe Lord! IF you liked it please feel free to send a note of encouragement to sermonindex.",
   "main": "js/main.js",
   "scripts": {
