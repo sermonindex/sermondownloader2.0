@@ -1,7 +1,9 @@
 Change log
-Last updated on : 03/12/2022
-Preparing for 1.0 Release
+
+Last updated on : 03/14/2022
 ============================
+
+Preparing for 1.0 Release
 
 -Uses vincentw.org hosted API
 -Minor CSS changes
@@ -12,8 +14,7 @@ TOFIX: Compile from win-installer.
 
 Tasks to complete
 =================
-0) IMPORTANT::
- LET USER CHOOSE DOWNLOAD FOLDER
+
 1) Implement file logging (possible use of electron-log package)
     Status:
         - 
@@ -51,5 +52,8 @@ Status:
 Status:
     - Done and tested
     - 05/05/2020 : Greg commented that it should just open file browser and not the file open dialog
+    - 03/14/2022 : Done, kinda. You can't open saved sermon folder until you set it.
 
+7) Let User choose download folder. 
+    Done kinda. Could be done much better most likely. Very not Linux/Darwin friendly.  
 

@@ -1,6 +1,6 @@
 /*
-Author      : Vincent L
-Date Modified: 3/11/22
+Author      : Sherebiah Tisbi & Vincent L
+Date Modified: 3/14/22
 Goal        : Main js for electron app for sermon downloader
 Change Log  : CustomMenu3/11
 */
@@ -11,7 +11,7 @@ const os = require('os');
 const fs = require('fs');
 const {dialog} = require('electron')
 const { remote } = require('electron')
-
+var sermonbasepath = fs.readFileSync("download_directory.txt").toString('utf-8');
 
 
  //handle setupevents as quickly as possible
@@ -45,7 +45,7 @@ function createWindow() {
         label: 'Menu',
             submenu: [
             {
-                label:'SermonIndex.net',
+                label:'Sermonindex.net',
                 click() { 
                     shell.openExternal('https://sermonindex.net')
                 } 
@@ -53,31 +53,40 @@ function createWindow() {
             {
                 label:'Open Sermon Folder',
                 click(){
-                    shell.openPath(os.homedir() + '/SermonIndex_Sermons/') 
+                    shell.openPath(sermonbasepath) 
                 }
             },
             {
-                label:'File Test',
+                label:'Change Download Directory',
                 click(){
                     dialog.showOpenDialog({
                    properties: ['openDirectory']
                     }).then(result => {
-                   console.log(result.filePaths)
+                    console.log(result.filePaths)
+                    fs.writeFile('download_directory.txt', result.filePaths.join() + "\\", (error) => {
+                    // In case of a error throw err exception.
+                    if (error) throw err;
+                        });
+                     dialog.showMessageBox(window, {
+                        message: 'Please restart program to take effect.',
+                    });
+
                    })
                 }
 
             },
+            {type:'separator'}, 
             {
                 label:'Dev Tools',
                 click(){
-                    createWindow.webContents.toggleDevTools()();
+                    window.webContents.openDevTools();
                 }
             },
             {type:'separator'}, 
             {
                 label:'Close App', 
                 click() { 
-                    app.quit() 
+                    app.quit()  
                 } 
             }
         ]

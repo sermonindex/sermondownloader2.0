@@ -1,6 +1,6 @@
 /*
-Author      : Sherebiah Tisbi
-Datw Written: 04/27/2020
+Author      : Sherebiah Tisbi & Vincent L
+Date Written: 04/27/2020
 Goal        : script pertains to index.html and caontains the code for almost entire app
 Change Log  : 05/09/2020 - MP3 duration for each download call
               05/18/2020 - Play All functionality
@@ -17,7 +17,8 @@ var speakerData, topicData, sermonData, speakerFolder,  audioDuration, media, me
 var menuState, countDownload, countPlayable, currentTab, sermonSortCol, sermonSortorder;
 
 var elemCurrentPlayingCell, elemMediaButton; 
-var sermonbasepath = os.homedir() + '/SermonIndex_Sermons/';
+var sermonbasepath = fs.readFileSync("download_directory.txt").toString('utf-8');
+//os.homedir() + '/SermonIndex_Sermons/';
 var playIcon = "<i class='fas fa-play'></i>";
 var pauseIcon = "<i class='fas fa-pause'></i>";
 var downloadIcon = "<i class='fas fa-download'></i>";
@@ -646,7 +647,7 @@ function loadSermons(e) {
             var speaker = e.currentTarget.attributes['data-speaker'].value;
             var speakerName = e.currentTarget.innerText;
             speakerFolder = sermonbasepath + speaker + "/";
-            apiUrl = 'https://vincentw.org/siapi/audio/speaker/' + speaker + ".json";
+            apiUrl = 'https://vincentw.org/siapi/speaker/' + speaker + ".json";
             console.log(apiUrl);
             logger.info('loadSermons()->Fetching sermons using sermonindex API for speaker >' + speakerName);
             $("#spanPlayAlert").html(spinnerIcon + " Loading Sermons of  > " + speakerName);
@@ -655,7 +656,7 @@ function loadSermons(e) {
         case "Topics":
             var topic = e.currentTarget.attributes['data-topic'].value;
             var topicName = e.currentTarget.innerText;
-            var apiUrl = 'https://vincentw.org/siapi/audio/topic/' + topic + '.json';
+            var apiUrl = 'https://vincentw.org/siapi/topic/' + topic + '.json';
             console.log(apiUrl);
             logger.info('loadSermons()->Fetching sermons using sermonindex API for speaker >' + speakerName);
             $("#spanPlayAlert").html(spinnerIcon + " Loading Sermons on  > " + topicName);
