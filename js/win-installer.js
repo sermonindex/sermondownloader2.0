@@ -14,11 +14,11 @@ function getInstallerConfig () {
   const outPath = path.join(rootPath, 'release-builds')
 
   return Promise.resolve({
-    appDirectory: path.join(outPath, 'SermonIndexGUI-win32-x64/'),
+    appDirectory: path.join(outPath, 'SermonindexGUI-win32-x64/'),
     authors: 'Sherebiah Tisbi',
     outputDirectory: path.join(outPath, 'windows-installer'),
     noMsi : false,
-    exe: 'SermonIndexGUI.exe',
+    exe: 'SermonindexGUI.exe',
     setupExe: 'SermonindexGUI_Setup.exe',
     setupIcon: path.join(rootPath, 'images','sermonindex-logo.ico')
   })

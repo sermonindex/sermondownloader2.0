@@ -10,7 +10,6 @@ Preparing for 1.0 Release
 -Fixed Various Typos
 -Added Custom Application Menu Bar
 -Updated README.md to include very basic Electron install instructions
-TOFIX: Compile from win-installer.
 
 Tasks to complete
 =================

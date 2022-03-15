@@ -8,7 +8,7 @@ This project is developed to provide the easy app based navigation for all sermo
 
 ## Getting Started
 
-> Under construction
+
 
 ### Running The App From sermonindex.net
 
@@ -41,6 +41,7 @@ npm start
 ### For Windows
 ````
 npx electron-packager .
+npm run package-win
 ````
 ### For MacOS
 > Under construction

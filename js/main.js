@@ -2,7 +2,7 @@
 Author      : Sherebiah Tisbi & Vincent L
 Date Modified: 3/14/22
 Goal        : Main js for electron app for sermon downloader
-Change Log  : CustomMenu3/11
+Change Log  : CustomMenu3/11 
 */
 
 //Lets App Open Browser Menu
