@@ -22,19 +22,15 @@ A step by step guide how to install this app
 
 ### Running App From Source
 
-#### For Windows
+#### For Windows/Linux/MacOS
 
-Please have node.js installed from https://nodejs.dev/
+Please have node.js installed from https://nodejs.dev/ or your local package repo
 ````
 git clone https://github.com/VincentXE/SermonIndex-GUI
 cd SermonIndex-GUI
 npm install
 npm start
 ````
-#### For MacOS
-> Under construction
-#### For Linux (Debian)
-> Under construction
 
 ## Building the app
 
