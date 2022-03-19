@@ -43,27 +43,29 @@ npm run package-win
 > Under construction
 
 ### For Linux 
-> Under construction
+!! If running debian, please put `electron-installer-debian": "^3.0.0"` as a dependency in package.json
+````
+npm run package-linux
+````
+If wanting to make debian installer:
 
-#### Ubuntu/Debian based
-> Under construction
-
-#### Others
-> Under construction
+```
+npm run create-debian-installer
+```
 
 ## Built With
 
 #### Basic framework 
-* [node 12.1.0](http://www.dropwizard.io/1.0.2/docs/) - powers the backend
-* [electron 11.5.0](https://maven.apache.org/) - powers the gui
+* [node](http://www.dropwizard.io/1.0.2/docs/) - powers the backend
+* [electron](https://maven.apache.org/) - powers the gui
 
 #### Dependencies
-* [needle 2.4.1](https://rometools.github.io/rome/) - to integrate sermonindex web APIs
-* [download 8.0.0](https://rometools.github.io/rome/) - to download the media files
-* [electron-log 4.1.2](https://rometools.github.io/rome/) - to create application logs
-* [electron-packager 14.2.1](https://rometools.github.io/rome/) - to package the app
-* [electron-installer-dmg 3.0.0](https://rometools.github.io/rome/) - to create installer for MacOS
-* [jquery 3.5.0](https://rometools.github.io/rome/) - to perform DOM operations
+* [needle](https://rometools.github.io/rome/) - to integrate sermonindex web APIs
+* [download](https://rometools.github.io/rome/) - to download the media files
+* [electron-log](https://rometools.github.io/rome/) - to create application logs
+* [electron-packager](https://rometools.github.io/rome/) - to package the app
+* [electron-installer-dmg](https://rometools.github.io/rome/) - to create installer for MacOS
+* [jquery](https://rometools.github.io/rome/) - to perform DOM operations
 
 ## Contributing
 > Under construction
