@@ -73,7 +73,7 @@ function createWindow() {
 
                         let path = result.filePaths[0].replaceAll('\\', '\\\\') 
                         window.webContents.executeJavaScript(`window.localStorage.setItem("sermon-download-path", "${ path }"); OnPathUpdate();`).then(() => {
-                            dialog.showMessageBox(window, { message: 'Successfully set new download path!' })
+                            dialog.showMessageBox(window, { message: 'Successfully set new download path! Please restart program.' })
                         })
                     })
                 }
