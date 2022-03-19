@@ -21,8 +21,6 @@ Tasks to complete
 3) Implement application configuration for some important confiugration items (possible use of electron-store package)
 4) Implement IRC integration for chat (need to fidn out suitable package)
 5) Progress bar while sermon is downloading
-6) When playing other sermon while one is alredy playing required two clicks
-    Status: Done, tested & verified.
 
 
 Previous Tasks:
@@ -51,8 +49,10 @@ Status:
 Status:
     - Done and tested
     - 05/05/2020 : Greg commented that it should just open file browser and not the file open dialog
-    - 03/14/2022 : Done, kinda. You can't open saved sermon folder until you set it.
+    - 03/14/2022 : Done
 
 7) Let User choose download folder. 
-    Done kinda. Could be done much better most likely. Very not Linux/Darwin friendly.  
+    - 3/19/2022 : Done and tested
 
+6) When playing other sermon while one is alredy playing required two clicks
+    Status: Done, tested & verified.

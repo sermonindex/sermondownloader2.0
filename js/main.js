@@ -6,13 +6,9 @@ Change Log  : CustomMenu3/11
 */
 
 //Lets App Open Browser Menu
-const {shell} = require('electron')
 const os = require('os');
 const fs = require('fs');
-const {dialog} = require('electron')
-const { remote } = require('electron')
-var sermonbasepath = fs.readFileSync("download_directory.txt").toString('utf-8');
-
+const { dialog, remote, shell } = require('electron')
 
  //handle setupevents as quickly as possible
  const setupEvents = require('../js/setupEvents');
@@ -40,7 +36,7 @@ function createWindow() {
     });
 
     //Custom App Menu
-     var menu = Menu.buildFromTemplate([
+    var menu = Menu.buildFromTemplate([
     {
         label: 'Menu',
             submenu: [
@@ -53,27 +49,34 @@ function createWindow() {
             {
                 label:'Open Sermon Folder',
                 click(){
-                    shell.openPath(sermonbasepath) 
+                    // We can not access window.localStorage from our main process, so we are forced to use this workaround if we don't want to resort to using a file
+                    window.webContents.executeJavaScript(`window.localStorage.getItem('sermon-download-path')`).then(path => {
+                        if (path) { 
+                            shell.openPath(path) 
+                        } else {
+                            dialog.showMessageBox(window, { message: 'Failed to open path because it has not been saved to storage.' })
+                        }
+                    })
+                    
                 }
             },
             {
                 label:'Change Download Directory',
                 click(){
-                    dialog.showOpenDialog({
-                   properties: ['openDirectory']
+                    dialog.showOpenDialog({ 
+                        properties: ['openDirectory'] 
                     }).then(result => {
-                    console.log(result.filePaths)
-                    fs.writeFile('download_directory.txt', result.filePaths.join() + "\\", (error) => {
-                    // In case of a error throw err exception.
-                    if (error) throw err;
-                        });
-                     dialog.showMessageBox(window, {
-                        message: 'Please restart program to take effect.',
-                    });
+                        if (result.canceled) { return; }
 
-                   })
+                        // We can not access window.localStorage from our main process, so we are forced to use this workaround if we don't want to resort to using a file
+                        // Escape the file path so JS doesnt eat the \
+
+                        let path = result.filePaths[0].replaceAll('\\', '\\\\') 
+                        window.webContents.executeJavaScript(`window.localStorage.setItem("sermon-download-path", "${ path }"); OnPathUpdate();`).then(() => {
+                            dialog.showMessageBox(window, { message: 'Successfully set new download path!' })
+                        })
+                    })
                 }
-
             },
             {type:'separator'}, 
             {
@@ -98,8 +101,6 @@ function createWindow() {
     //console.log(screen.getPrimaryDisplay());
     //console.log(os.platform());
 }
-
-
 
 app.on('ready',createWindow);
 

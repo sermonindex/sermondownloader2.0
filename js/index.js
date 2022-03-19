@@ -8,8 +8,10 @@ Change Log  : 05/09/2020 - MP3 duration for each download call
 */
 const needle = require('needle');
 const download = require('download');
+const path = require('path')
 const os = require('os');
 const fs = require('fs');
+
 const logger = require('electron-log');
 const machine = require('child_process');
 
@@ -17,8 +19,6 @@ var speakerData, topicData, sermonData, speakerFolder,  audioDuration, media, me
 var menuState, countDownload, countPlayable, currentTab, sermonSortCol, sermonSortorder;
 
 var elemCurrentPlayingCell, elemMediaButton; 
-var sermonbasepath = fs.readFileSync("download_directory.txt").toString('utf-8');
-//os.homedir() + '/SermonIndex_Sermons/';
 var playIcon = "<i class='fas fa-play'></i>";
 var pauseIcon = "<i class='fas fa-pause'></i>";
 var downloadIcon = "<i class='fas fa-download'></i>";
@@ -41,9 +41,19 @@ var iconPlayallpause = '<i class="fas fa-bars"></i> &nbsp; <i class="fas fa-paus
 const MEDIA_STATE = { PLAYING: 'playing', PAUSED: 'paused', ENDED: 'ended' ,UNKNOWN: 'unknown'}
 
 $(document).ready(function () {
-    //alert('I am ready to roll!');
+    // console.log(window.localStorage.getItem('sermon-download-path'))
 
     logger.info('GUI is initialized.');
+
+    let basePath = window.localStorage.getItem('sermon-download-path')
+    if (!basePath) {
+        logger.info('No download path has been defined, setting to default...')
+        basePath = path.join(os.homedir(), 'Sermons')
+        window.localStorage.setItem('sermon-download-path', basePath)
+    }
+
+    RebuildFolderTree(basePath) // Ensure the folder tree is intact
+
     $("#divSermonStatus").hide();
 
     //collect some important controls as variable
@@ -117,11 +127,44 @@ $(document).ready(function () {
     buttonPrevTrack.on('click', playPrevTrack);
     buttonNextTrack.on('click', playNextTrack);
     website.on('click',openWebsite);
-
 });
 
-/* All event handlers */
+// functions for getting our base path & paths for speakers, topics, etc
+function GetBasePath() {
+    return window.localStorage.getItem('sermon-download-path')
+}
 
+function GetTopicPath(speaker) {
+    return path.join(GetBasePath(), 'Topics', speaker.topic)
+}
+
+function GetSpeakerPath(speaker) {
+    return path.join(GetBasePath(), 'Speakers', speaker.speaker_name)
+}
+
+function RebuildFolderTree(basePath) {
+    logger.info('Rebuilding folder tree...')
+    let paths = [
+        basePath,
+        path.join(basePath, 'Topics'),
+        path.join(basePath, 'Speakers'),
+    ]
+
+    for (let i = 0; i < paths.length; i++) {
+        let path = paths[i]
+        if (!fs.existsSync(path)) {
+            logger.info(`RebuildFolderTree: Path ${ path } does not exist, rebuilding!`)
+            fs.mkdirSync(path)
+        } else {
+            logger.info(`RebuildFolderTree: Path ${ path } does exist!, skipping!`)
+        }
+    }
+}
+
+// Called from main process since localStorage changes do not trigger events when modified from the same window?
+function OnPathUpdate() { RebuildFolderTree(GetBasePath()) }
+
+/* All event handlers */
 // handles the sermon table header click event for sorting 
 function sortSermons(e){ 
     var elem = e.currentTarget;
@@ -299,6 +342,8 @@ function downloadAll(e) {
 
         logger.verbose('>Sermon : ' + url + '\\n>Speaker folder : ' + sermonpath + '\\nSermon filename : ' + sermonfilename + '\\nSermon title : ' + sermontitle);
 
+        logger.info(`Sermon path ${ sermonpath } Sermon filename ${ sermonfilename }`)
+
         if (!fs.existsSync(sermonpath + sermonfilename)) {
             var totalToDownload = countDownload;
             var completedDownloading = 0;
@@ -459,6 +504,8 @@ function avOrIOaction(e) {
     var sermonTitle = e.currentTarget.attributes['data-sermontitle'].value;
     console.log(filepath);
     logger.info('Audio player was clicked for ' + sermonTitle);
+    logger.info(`Attributes ${ e.currentTarget.attributes.keys }`)
+
     if (fs.existsSync(filepath)) {
         console.log("Play : " + filepath);
         logger.info('sermon [' + sermonTitle +'] exists locallly.');
@@ -494,7 +541,7 @@ function avOrIOaction(e) {
             }
         }
     } else {
-        console.log("Download :" + filepath);
+        console.log("Download: " + filepath);
         logger.info('Sermon [' + sermonTitle + '] does not exist locally so will download.');
         // $("#divSermonStatus").show();
         e.currentTarget.children[0].outerHTML = "<span class='sermon-downloading'>" + spinnerIcon + "</span>";
@@ -646,7 +693,11 @@ function loadSermons(e) {
         case "Speakers":
             var speaker = e.currentTarget.attributes['data-speaker'].value;
             var speakerName = e.currentTarget.innerText;
-            speakerFolder = sermonbasepath + speaker + "/";
+    
+            let speakerFolder = path.join(GetBasePath(), speaker)
+            logger.info(`loadSermons->speakerFolder ${ speakerFolder }`)
+
+            //speakerFolder = sermonbasepath + speaker + "/";
             apiUrl = 'https://vincentw.org/siapi/speaker/' + speaker + ".json";
             console.log(apiUrl);
             logger.info('loadSermons()->Fetching sermons using sermonindex API for speaker >' + speakerName);
@@ -887,14 +938,16 @@ function formattedSermonRow(sermon)
     var ficon, duration, html;
     var sermontitle = removeQuotes(sermon.title);
     var sermonFilename = formattedSermontitle(sermontitle) + "." + sermon.format;
-    var sermonFilepath;
-    if (currentTab != 'Speakers') { 
-        speakerFolder = getSpeakerFolder(sermon);
-    }
-    sermonFilepath = speakerFolder + sermonFilename;
+    //var sermonFilepath;
 
+    var speakerFolder = (currentTab == 'Speakers' ? GetSpeakerPath(sermon) : GetTopicPath(sermon));
+    var sermonFilepath = path.join(speakerFolder, sermonFilename)
+
+    //sermonFilepath = speakerFolder + sermonFilename;
     // logger.info('formattedSermonRow()->started generating html for sermon>' + sermontitle);
     
+    logger.info(`formattedSermonRow()->sermonFilePath: ${ sermonFilepath }`)
+
     if (fs.existsSync(sermonFilepath)) {
         if (sermon.format == 'mp3') {
             ficon = "<span class='playable' data-toggle='tooltip' data-placement='bottom' title='Play'>" + playIcon + "</span>";
@@ -940,16 +993,6 @@ function detailedSermonTitle(sermon) {
 }
 
 // prepares speakerolder in case hwere sermons are listed for a topic
-function getSpeakerFolder(topic) {
-    var spkcode;
-
-    spkcode = topic.speaker_name.replace(/\s\s/g, ' ').toLowerCase();
-    spkcode = spkcode.replace(/[.]/g, "");
-    spkcode = spkcode.replace(/\s/g, '_');
-
-    spkcode = sermonbasepath + spkcode + "/";
-    return spkcode;
-}
 
 // helper function to cleanup the string from special characters
 function formattedSermontitle(title) {
