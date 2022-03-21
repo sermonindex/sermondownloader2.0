@@ -1,8 +1,6 @@
 <img src="https://raw.githubusercontent.com/sermonindex/sermondownloader2.0/master/_app-image.jpg">
 
-My personal fork of sermonindex downloader 2.0. Please feel free to take contributions from this repo and integrate it in the main repo.
-
-# SermonIndex-GUI
+# Sermonindex Downloader 2.1
 
 This project is developed to provide the easy app based navigation for all sermons available on <a href="https://www.sermonindex.net">sermonindex</a>. The goal is to aid users to cate local copy of sermons by downloading them. User has choice to download single or all sermons of a desired speaker. This app is cross platform and should work seamlessly on Windows, MAcOS and Linux (debian) without any issues.
 
@@ -39,6 +37,8 @@ npm start
 npx electron-packager .
 npm run package-win
 ````
+
+If you want to make an installer, please use the included .nsi script. 
 ### For MacOS
 > Under construction
 
@@ -48,7 +48,6 @@ npm run package-win
 npm run package-linux
 ````
 If wanting to make debian installer:
-
 ```
 npm run create-debian-installer
 ```

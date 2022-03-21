@@ -1,6 +1,6 @@
 /*
 Author      : Sherebiah Tisbi & Vincent L
-Date Written: 04/27/2020
+Date Written: 03/21/2022
 Goal        : script pertains to index.html and caontains the code for almost entire app
 Change Log  : 05/09/2020 - MP3 duration for each download call
               05/18/2020 - Play All functionality
@@ -48,7 +48,7 @@ $(document).ready(function () {
     let basePath = window.localStorage.getItem('sermon-download-path')
     if (!basePath) {
         logger.info('No download path has been defined, setting to default...')
-        basePath = path.join(os.homedir(), 'Sermons')
+        basePath = path.join(os.homedir(), 'SermonIndex_Sermons')
         window.localStorage.setItem('sermon-download-path', basePath)
     }
 
@@ -432,7 +432,7 @@ function showSermonDescription(e) {
 
 // loads the topics list 
 function loadTopics() {
-    var apiUrl = 'https://vincentw.org/siapi/topic/_sermonindex.json';
+    var apiUrl = 'https://api.sermonindex.net/audio/topic/_sermonindex.json';
     var options = {
         headers: {
             "Content-Type": "application/json"
@@ -464,7 +464,7 @@ function loadTopics() {
 //loads the speakers list
 function loadSpeakers()
 {
-    var apiUrl = 'https://vincentw.org/siapi/speaker/_sermonindex.json';
+    var apiUrl = 'https://api.sermonindex.net/audio/speaker/_sermonindex.json';
     var options = {
         headers: {
             "Content-Type": "application/json"
@@ -698,7 +698,7 @@ function loadSermons(e) {
             logger.info(`loadSermons->speakerFolder ${ speakerFolder }`)
 
             //speakerFolder = sermonbasepath + speaker + "/";
-            apiUrl = 'https://vincentw.org/siapi/speaker/' + speaker + ".json";
+            apiUrl = 'https://api.sermonindex.net/audio/speaker/' + speaker + ".json";
             console.log(apiUrl);
             logger.info('loadSermons()->Fetching sermons using sermonindex API for speaker >' + speakerName);
             $("#spanPlayAlert").html(spinnerIcon + " Loading Sermons of  > " + speakerName);
@@ -707,7 +707,7 @@ function loadSermons(e) {
         case "Topics":
             var topic = e.currentTarget.attributes['data-topic'].value;
             var topicName = e.currentTarget.innerText;
-            var apiUrl = 'https://vincentw.org/siapi/topic/' + topic + '.json';
+            var apiUrl = 'https://api.sermonindex.net/audio/topic/' + topic + '.json';
             console.log(apiUrl);
             logger.info('loadSermons()->Fetching sermons using sermonindex API for speaker >' + speakerName);
             $("#spanPlayAlert").html(spinnerIcon + " Loading Sermons on  > " + topicName);

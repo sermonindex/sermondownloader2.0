@@ -1,23 +1,23 @@
 {
-  "name": "Sermonindex-GUI",
-  "productName": "SermonindexGUI",
-  "version": "1.0.0",
+  "name": "sermondownloader2.0",
+  "productName": "Sermon Downloader 2.0",
+  "version": "2.1.0",
   "description": "Sermon downloader is offered by sermonindex.net. This is a free to use and distribute. The purpose is to provide sermons download in a batch with single click capabilities to the user. It is made available for God's glory. Enjoy and rejoice inthe Lord! IF you liked it please feel free to send a note of encouragement to sermonindex.",
   "main": "js/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "package-linux": "electron-packager . SermonIndex-GUI --overwrite --asar --platform=linux --arch=x64 --icon=images/sermonindex-logo.png --out=release-builds",
-    "create-debian-installer": "electron-installer-debian --overwrite --src release-builds/SermonIndex-GUI-linux-x64/ --arch amd64 --icon=images/sermonindex-logo.png --config debian.json",
-    "package-mac": "electron-packager . SermonIndex-GUI --overwrite --platform=darwin --arch=x64 --out=release-builds --icon=images/sermonindex-logo.icns",
-    "create-mac-installer": "electron-installer-dmg ./release-builds/SermonIndex-GUI-darwin-x64/SermonIndex-GUI.app SermonIndex-GUI --out=release-builds --overwrite --icon=images/sermonindex-logo.icns",
-    "package-win": "electron-packager . SermonIndex-GUI --overwrite --asar --icon=images/sermonindex-logo.ico --out=release-builds"
+    "package-linux": "electron-packager . sermondownloader2.1 --overwrite --asar --platform=linux --arch=x64 --icon=images/sermonindex-logo.png --out=release-builds",
+    "create-debian-installer": "electron-installer-debian --overwrite --src release-builds/sermondownloader2.1-linux-x64/ --arch amd64 --icon=images/sermonindex-logo.png --config debian.json",
+    "package-mac": "electron-packager . sermondownloader2.1 --overwrite --platform=darwin --arch=x64 --out=release-builds --icon=images/sermonindex-logo.icns",
+    "create-mac-installer": "electron-installer-dmg ./release-builds/sermondownloader2.1-darwin-x64/sermondownloader2.1.app sermondownloader2.1 --out=release-builds --overwrite --icon=images/sermonindex-logo.icns",
+    "package-win": "electron-packager . sermondownloader2.1 --overwrite --asar --icon=images/sermonindex-logo.ico --out=release-builds"
   },
   "keywords": [
     "sermondownloader",
     "sermonindex"
   ],
-  "author": "Vincent L",
+  "author": "SermonIndex",
   "license": "ISC",
   "devDependencies": {
     "download": "^8.0.0",
@@ -36,10 +36,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VincentXE/SermonIndex-GUI"
+    "url": "git+https://github.com/sermonindex/sermondownloader2.0"
   },
   "bugs": {
-    "url": "https://github.com/VincentXE/SermonIndex-GUI/issues"
+    "url": "https://github.com/sermonindex/sermondownloader2.0/issues"
   },
-  "homepage": "https://github.com/VincentXE/SermonIndex-GUI#readme"
+  "homepage": "https://github.com/sermonindex/sermondownloader2.0#readme"
 }

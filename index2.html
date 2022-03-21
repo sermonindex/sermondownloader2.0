@@ -1,34 +1,19 @@
 <!---
-Author          : Sherebiah Tisbi
-Date Written    : 04/27/2020
-Goal            : Main GUI for sermon downloader
-Change Log      : None 
+Author          : Sherebiah Tisbi + Vincent L
+Date Written    : 03/21/2022
+Goal            : Main GUI for sermon doanloader
+Change Log      : New Header 
 -->
 <!DOCTYPE html>
 <html>
 
     <head>
         <meta charset="UTF-8">
-        <title>SermonIndex-GUI 1.0</title>
+        <title>Sermon Downloader 2.1</title>
         <link rel="stylesheet" href="fontawesome/css/all.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="css/custom.css">
-        <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        .imgbox {
-            display: grid;
-            height: 100%;
-        }
-        .center-fit {
-            max-width: 100%;
-            max-height: 100vh;
-            margin: auto;
-        }
-    </style>
     </head>
 
     <body>
@@ -36,31 +21,36 @@ Change Log      : None
         <div id="divAbout" class="aboutpopup">
             <div class="modal-header">
                 <h3 class="modal-title">About Sermonindex</h3>
-                <button id="btnCloseAbout" class="btn btn-secondary" aria-label="close" data-toggle="tooltip" data-placement="left" title="Close">
+                <button id="btnCloseAbout" class="btn btn-secondary" aria-label="close" data-toggle="tooltip"
+                    data-placement="left" title="Close">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <hr>
             <p>
-                SermonIndex is not just a website but really has become a movement of believers seeking the 'old paths' (Jeremiah 6:16).
-                This journey of faith weaves through the current state of evangelical Christianity and the passionate preaching of many
-                godly ministers in our day. Many are seeking authenticity, reality and sincerity in the Christian faith. In a day when
-                popular preachers are telling lies (Jeremiah 5:30-31), there is a great renewed desire to find the real Jesus in the
-                midst of the counterfeit. SermonIndex has been able to archive many of the best preaching messages given in the last 50
+                SermonIndex is not just a website but really has become a movement of believers seeking the 'old paths'
+                (Jeremiah 6:16).
+                This journey of faith weaves through the current state of evangelical Christianity and the passionate
+                preaching of many
+                godly ministers in our day. Many are seeking authenticity, reality and sincerity in the Christian faith.
+                In a day when
+                popular preachers are telling lies (Jeremiah 5:30-31), there is a great renewed desire to find the real
+                Jesus in the
+                midst of the counterfeit. SermonIndex has been able to archive many of the best preaching messages given
+                in the last 50
                 years in audio mp3 form.
             </p>
             <p>
-                To explore more please visit <a href="www.sermonindex.net" target="_blank">Sermonindex</a> website.
+                To explore more please visit <a id="aWebsite" href="www.sermonindex.net" target="_blank">Sermonindex</a> website.
             </p>
             <p>
                 &copy; Sermonindex.net 2002 - 2022
             </p>
         </div>
-        </div>
         <div id="appContainer" class="container-fluid">
             <div id="menuBar" class="menubar closemenu">
                 <ul>
-                    <li><a id="aAbout">About Sermonindex</a></li>
+                    <li><a id="aAbout">About</a></li>
                 </ul>
             </div>
             <div id="menuPointer" class="menupointer">
@@ -70,10 +60,10 @@ Change Log      : None
             </div>
             <div id="divAppHeader" class="row">
                 <nav class="navbar col-md-12 app-header">
-                    <div class="imgbox">
-                        <img class="center-fit" src="images/app-header.png" width="700" height="190"></span></div>
-                    </span>
+                    <div class="headersize">
+                    <span><img class ="center-fit" src="images/app-header.png" class="d-inline-block align-top" alt=""></div></span>
                 </nav>
+            </div>
             <div id="divSermonArea" class="row">
                 <!-- Speakers/Topics/Playlist listing -->
                 <div class="col col-md-4 speakermenu">
@@ -202,7 +192,7 @@ Change Log      : None
         </div>
         <!-- footer -->
         <footer id="footerArea">
-            <div class="bottom">
+            <div class="fixed-bottom">
                 <div class="col-md-12 footer-content text-center">
                     &copy; Sermonindex.net 2002 - 2022
                 </div>
