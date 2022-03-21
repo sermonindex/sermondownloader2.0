@@ -14,11 +14,11 @@ function getInstallerConfig () {
   const outPath = path.join(rootPath, 'release-builds')
 
   return Promise.resolve({
-    appDirectory: path.join(outPath, 'sermon-downloader-2.0-win32-x64/'),
+    appDirectory: path.join(outPath, 'sermon-downloader-2.1-win32-x64/'),
     authors: 'Sherebiah Tisbi',
     outputDirectory: path.join(outPath, 'windows-installer'),
     noMsi : false,
-    exe: 'sermon-downloader-2.0.exe',
+    exe: 'sermon-downloader-2.1.exe',
     setupExe: 'Setup_SermonDownloader2.exe',
     setupIcon: path.join(rootPath, 'images','sermonindex-logo.ico')
   })

@@ -1,20 +1,14 @@
 <img src="https://raw.githubusercontent.com/sermonindex/sermondownloader2.0/master/_app-image.jpg">
 
-# Sermonindex Downloader 2.0
+# Sermonindex Downloader 2.1
 
 This project is developed to provide the easy app based navigation for all sermons available on <a href="https://www.sermonindex.net">sermonindex</a>. The goal is to aid users to cate local copy of sermons by downloading them. User has choice to download single or all sermons of a desired speaker. This app is cross platform and should work seamlessly on Windows, MAcOS and Linux (debian) without any issues.
 
 ## Getting Started
 
-> Under construction
 
-### System Requirement
 
-Any desktop/laptop with Windows 10, MacOS or Linux is enough to install and run this app.
-
-Download links for Operating Systems on <a href="https://www.sermonindex.net/downloader.php">SermonIndex App Page</a>
-
-### Installing
+### Running The App From sermonindex.net
 
 A step by step guide how to install this app
 
@@ -23,51 +17,61 @@ A step by step guide how to install this app
 * Choose the Operating System you want to download the installer for and click on download
 * Based on your operating system follow below steps further
 ```
-#### For Windows
-> Under construction
-#### For MacOS
-> Under construction
-#### For Linux (Debian)
-> Under construction
 
-## Running the app
-> Under construction
+### Running App From Source
+
+#### For Windows/Linux/MacOS
+
+Please have node.js installed from https://nodejs.dev/ or your local package repo
+````
+git clone https://github.com/VincentXE/SermonIndex-GUI
+cd SermonIndex-GUI
+npm install
+npm start
+````
+
+## Building the app
 
 ### For Windows
-> Under construction
+````
+npx electron-packager .
+npm run package-win
+````
 
+If you want to make an installer, please use the included .nsi script. 
 ### For MacOS
 > Under construction
 
 ### For Linux 
-> Under construction
-
-#### Ubuntu/Debian based
-> Under construction
-
-#### Others
-> Under construction
+!! If running debian, please put `electron-installer-debian": "^3.0.0"` as a dependency in package.json
+````
+npm run package-linux
+````
+If wanting to make debian installer:
+```
+npm run create-debian-installer
+```
 
 ## Built With
 
 #### Basic framework 
-* [node 12.1.0](http://www.dropwizard.io/1.0.2/docs/) - powers the backend
-* [electron 8.2.3](https://maven.apache.org/) - powers the gui
+* [node](http://www.dropwizard.io/1.0.2/docs/) - powers the backend
+* [electron](https://maven.apache.org/) - powers the gui
 
 #### Dependencies
-* [needle 2.4.1](https://rometools.github.io/rome/) - to integrate sermonindex web APIs
-* [download 8.0.0](https://rometools.github.io/rome/) - to download the media files
-* [electron-log 4.1.2](https://rometools.github.io/rome/) - to create application logs
-* [electron-packager 14.2.1](https://rometools.github.io/rome/) - to package the app
-* [electron-installer-dmg 3.0.0](https://rometools.github.io/rome/) - to create installer for MacOS
-* [jquery 3.5.0](https://rometools.github.io/rome/) - to perform DOM operations
+* [needle](https://rometools.github.io/rome/) - to integrate sermonindex web APIs
+* [download](https://rometools.github.io/rome/) - to download the media files
+* [electron-log](https://rometools.github.io/rome/) - to create application logs
+* [electron-packager](https://rometools.github.io/rome/) - to package the app
+* [electron-installer-dmg](https://rometools.github.io/rome/) - to create installer for MacOS
+* [jquery](https://rometools.github.io/rome/) - to perform DOM operations
 
 ## Contributing
 > Under construction
 
 ## Authors
 
-* **Sherebiah Tishbi**
+* **Sherebiah Tishbi** for initial code
 
 ## License
 
