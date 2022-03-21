@@ -14,6 +14,21 @@ Change Log      : None
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="css/custom.css">
+        <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .imgbox {
+            display: grid;
+            height: 100%;
+        }
+        .center-fit {
+            max-width: 100%;
+            max-height: 100vh;
+            margin: auto;
+        }
+    </style>
     </head>
 
     <body>
@@ -21,31 +36,26 @@ Change Log      : None
         <div id="divAbout" class="aboutpopup">
             <div class="modal-header">
                 <h3 class="modal-title">About Sermonindex</h3>
-                <button id="btnCloseAbout" class="btn btn-secondary" aria-label="close" data-toggle="tooltip"
-                    data-placement="left" title="Close">
+                <button id="btnCloseAbout" class="btn btn-secondary" aria-label="close" data-toggle="tooltip" data-placement="left" title="Close">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <hr>
             <p>
-                SermonIndex is not just a website but really has become a movement of believers seeking the 'old paths'
-                (Jeremiah 6:16).
-                This journey of faith weaves through the current state of evangelical Christianity and the passionate
-                preaching of many
-                godly ministers in our day. Many are seeking authenticity, reality and sincerity in the Christian faith.
-                In a day when
-                popular preachers are telling lies (Jeremiah 5:30-31), there is a great renewed desire to find the real
-                Jesus in the
-                midst of the counterfeit. SermonIndex has been able to archive many of the best preaching messages given
-                in the last 50
+                SermonIndex is not just a website but really has become a movement of believers seeking the 'old paths' (Jeremiah 6:16).
+                This journey of faith weaves through the current state of evangelical Christianity and the passionate preaching of many
+                godly ministers in our day. Many are seeking authenticity, reality and sincerity in the Christian faith. In a day when
+                popular preachers are telling lies (Jeremiah 5:30-31), there is a great renewed desire to find the real Jesus in the
+                midst of the counterfeit. SermonIndex has been able to archive many of the best preaching messages given in the last 50
                 years in audio mp3 form.
             </p>
             <p>
-                To explore more please visit <a id="aWebsite" href="www.sermonindex.net" target="_blank">Sermonindex</a> website.
+                To explore more please visit <a href="www.sermonindex.net" target="_blank">Sermonindex</a> website.
             </p>
             <p>
                 &copy; Sermonindex.net 2002 - 2022
             </p>
+        </div>
         </div>
         <div id="appContainer" class="container-fluid">
             <div id="menuBar" class="menubar closemenu">
@@ -60,13 +70,11 @@ Change Log      : None
             </div>
             <div id="divAppHeader" class="row">
                 <nav class="navbar col-md-12 app-header">
-                    <span><img src="images/sermonidex-top-large-2.png" class="d-inline-block align-top" alt=""></span>
-                    <span class="app-title">
-                        <h2>SermonIndex GUI 1.0</h2>
-                           <p>Notice: You are using the Audio API Backup on vincentw.org</p>
+                    <div class="imgbox">
+                        <span><img src="images/sermonindexlogonew.jpg" class="d-inline-block align-top" alt="">
+                        <img class="center-fit" src="images/siteheader.jpg" width="700" height="190"></span></div>
                     </span>
                 </nav>
-            </div>
             <div id="divSermonArea" class="row">
                 <!-- Speakers/Topics/Playlist listing -->
                 <div class="col col-md-4 speakermenu">

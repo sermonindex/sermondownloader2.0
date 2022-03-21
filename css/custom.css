@@ -382,6 +382,24 @@ footer {
     z-index: 1;
 }
 
+
+.changelogpopup {
+    /* height: 75%; */
+    width: 65%;
+    margin-left: 350px;
+    margin-top: 200px;
+    -webkit-box-shadow: 10px 10px 51px -19px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 51px -19px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 51px -19px rgba(0,0,0,0.75);    
+    position: fixed;
+    background-color: rgb(51, 51, 51); 
+    color: whitesmoke;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+
 .sortActive {
     color: black;
 }
