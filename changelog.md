@@ -11,7 +11,7 @@ Last updated on : 03/21/2022
 
 - Minor File Logging Improvements
 
-- Ability to Choose Download Directory
+- Ability to Choose Download Directory (thanks @wally-rblx)
 
 - Fixed Various Typos
 
