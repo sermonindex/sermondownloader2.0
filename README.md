@@ -41,7 +41,11 @@ npm run package-win
 
 If you want to make an installer, please use the included .nsi script. 
 ### For MacOS
-> Under construction
+
+````
+npm run package-mac
+npm run create-mac-installer
+````
 
 ### For Linux 
 !! If running debian, please put `electron-installer-debian": "^3.0.0"` as a dependency in package.json
