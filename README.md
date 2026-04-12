@@ -25,8 +25,8 @@ A step by step guide how to install this app
 
 Please have node.js installed from https://nodejs.dev/ or your local package repo
 ````
-git clone https://github.com/VincentXE/SermonIndex-GUI
-cd SermonIndex-GUI
+git clone https://github.com/sermonindex/sermondownloader2.0
+cd sermondownloader2.0
 npm install
 npm run smoke
 npm start
