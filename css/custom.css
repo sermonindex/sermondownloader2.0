@@ -192,12 +192,34 @@ body {
 }
 
 #tblSermons tbody tr:hover td:first-child {
-    cursor: pointer;
-    color: whitesmoke;
+    color: inherit;
 }
 
 .playable {
     color: #b2c497;
+}
+
+.sermon-action-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 1.25rem;
+}
+
+.sermon-action-button {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+
+.sermon-action-button:hover,
+.sermon-action-button:focus {
+    color: whitesmoke;
+    outline: none;
 }
 
 .playing {
