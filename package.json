@@ -5,13 +5,16 @@
   "description": "Sermon downloader is offered by sermonindex.net. This is a free to use and distribute. The purpose is to provide sermons download in a batch with single click capabilities to the user. It is made available for God's glory. Enjoy and rejoice inthe Lord! IF you liked it please feel free to send a note of encouragement to sermonindex.",
   "main": "js/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --check js/main.js && node --check js/index.js && node --check js/package-app.js && node --check js/setupEvents.js && node --check js/win-installer.js",
     "start": "electron .",
-    "package-linux": "electron-packager . sermondownloader2.1 --overwrite --asar --platform=linux --arch=x64 --icon=images/sermonindex-logo.png --out=release-builds",
+    "smoke": "electron . --smoke-test",
+    "package-linux": "node js/package-app.js linux x64 images/sermonindex-logo.png asar",
     "create-debian-installer": "electron-installer-debian --overwrite --src release-builds/sermondownloader2.1-linux-x64/ --arch amd64 --icon=images/sermonindex-logo.png --config debian.json",
-    "package-mac": "electron-packager . sermondownloader2.1 --overwrite --platform=darwin --arch=x64 --out=release-builds --icon=images/sermonindex-logo.icns",
+    "package-mac": "node js/package-app.js darwin x64 images/sermonindex-logo.icns",
     "create-mac-installer": "electron-installer-dmg ./release-builds/sermondownloader2.1-darwin-x64/sermondownloader2.1.app sermondownloader2.1 --out=release-builds --overwrite --icon=images/sermonindex-logo.icns",
-    "package-win": "electron-packager . sermondownloader2.1 --overwrite --asar --icon=images/sermonindex-logo.ico --out=release-builds"
+    "package-win": "node js/package-app.js win32 x64 images/sermonindex-logo.ico asar",
+    "create-win-installer": "node js/win-installer.js",
+    "dist-win": "npm run package-win && npm run create-win-installer"
   },
   "keywords": [
     "sermondownloader",
@@ -20,19 +23,17 @@
   "author": "SermonIndex",
   "license": "ISC",
   "devDependencies": {
-    "download": "^8.0.0",
-    "electron": "^22.3.25",
-    "electron-installer-dmg": "^3.0.0",
-    "electron-log": "^4.1.2",
-    "electron-packager": "^15.4.0",
-    "electron-winstaller": "^5.0.0",
+    "@electron/packager": "^19.1.0",
+    "electron": "^39.8.5",
+    "electron-installer-dmg": "^5.0.1",
+    "electron-log": "^5.4.3",
+    "electron-winstaller": "^5.4.0",
     "jquery": "^3.5.0"
   },
   "dependencies": {
-    "download": "^8.0.0",
-    "electron-log": "^4.1.2",
+    "electron-log": "^5.4.3",
     "jquery": "^3.5.0",
-    "needle": "^2.4.1"
+    "needle": "^3.5.0"
   },
   "repository": {
     "type": "git",

@@ -25,9 +25,10 @@ A step by step guide how to install this app
 
 Please have node.js installed from https://nodejs.dev/ or your local package repo
 ````
-git clone https://github.com/VincentXE/SermonIndex-GUI
-cd SermonIndex-GUI
+git clone https://github.com/sermonindex/sermondownloader2.0
+cd sermondownloader2.0
 npm install
+npm run smoke
 npm start
 ````
 
@@ -35,11 +36,15 @@ npm start
 
 ### For Windows
 ````
-npx electron-packager .
 npm run package-win
+npm run create-win-installer
 ````
 
-If you want to make an installer, please use the included .nsi script. 
+Or run both steps together:
+````
+npm run dist-win
+````
+
 ### For MacOS
 
 ````
@@ -65,9 +70,8 @@ npm run create-debian-installer
 
 #### Dependencies
 * [needle](https://rometools.github.io/rome/) - to integrate sermonindex web APIs
-* [download](https://rometools.github.io/rome/) - to download the media files
 * [electron-log](https://rometools.github.io/rome/) - to create application logs
-* [electron-packager](https://rometools.github.io/rome/) - to package the app
+* [@electron/packager](https://rometools.github.io/rome/) - to package the app
 * [electron-installer-dmg](https://rometools.github.io/rome/) - to create installer for MacOS
 * [jquery](https://rometools.github.io/rome/) - to perform DOM operations
 

@@ -5,38 +5,111 @@ Goal        : Main js for electron app for sermon downloader
 Change Log  : CustomMenu3/11 
 */
 
-//Lets App Open Browser Menu
-const os = require('os');
-const fs = require('fs');
-const { dialog, remote, shell } = require('electron')
+// Lets App Open Browser Menu
+const path = require('path');
+const { app, BrowserWindow, dialog, Menu, screen, shell } = require('electron');
+const logger = require('electron-log/main');
+const isSmokeTest = process.argv.includes('--smoke-test');
 
- //handle setupevents as quickly as possible
- const setupEvents = require('../js/setupEvents');
- if (setupEvents.handleSquirrelEvent()) {
+logger.initialize();
+
+// handle setup events as quickly as possible
+const setupEvents = require('../js/setupEvents');
+if (setupEvents.handleSquirrelEvent()) {
     // squirrel event handled and app will exit in 1000ms, so don't do anything else
     return;
- }
+}
 
-const { app, BrowserWindow, screen, Menu } = require('electron');
-var path = require('path');
-var window;
+let window;
+
+function getWindowIconPath() {
+    const imageName = process.platform === 'win32'
+        ? 'sermonindex-logo.ico'
+        : 'sermonindex-logo1.png';
+
+    return path.join(__dirname, '..', 'images', imageName);
+}
 
 //create main GUI window
 function createWindow() {
-    var display = screen.getPrimaryDisplay();
+    const display = screen.getPrimaryDisplay();
+    const width = Math.max(1100, display.workAreaSize.width - 300);
+    const height = Math.max(700, display.workAreaSize.height - 100);
+
     window = new BrowserWindow({
-        width: display.bounds.width - 500,
-        height: display.bounds.height - 200,
+        width,
+        height,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
             devTools: true,
         },
-        icon:'../images/sermonindex-logo1.png'
+        icon: getWindowIconPath(),
+        show: false
     });
 
-    //Custom App Menu
-    var menu = Menu.buildFromTemplate([
+    window.once('ready-to-show', () => {
+        window.show();
+    });
+
+    window.webContents.setWindowOpenHandler(({ url }) => {
+        shell.openExternal(url);
+        return { action: 'deny' };
+    });
+
+    if (isSmokeTest) {
+        window.webContents.once('did-finish-load', () => {
+            window.webContents.executeJavaScript(`
+                new Promise((resolve) => {
+                    const deadline = Date.now() + 8000;
+
+                    const waitForSpeaker = setInterval(() => {
+                        const speaker = document.querySelector('#tblSpeakers td[data-speaker]');
+                        if (!speaker && Date.now() <= deadline) {
+                            return;
+                        }
+
+                        clearInterval(waitForSpeaker);
+                        if (!speaker) {
+                            resolve({ speaker: null, sermons: 0 });
+                            return;
+                        }
+
+                        speaker.click();
+
+                        const waitForSermons = setInterval(() => {
+                            const sermonRows = document.querySelectorAll('#tblSermons tbody td:first-child');
+                            if (sermonRows.length === 0 && Date.now() <= deadline) {
+                                return;
+                            }
+
+                            clearInterval(waitForSermons);
+                            const firstActionCell = sermonRows[0];
+                            resolve({
+                                speaker: speaker.textContent.trim(),
+                                sermons: sermonRows.length,
+                                playButtons: document.querySelectorAll('#tblSermons tbody .sermon-action-play').length,
+                                downloadButtons: document.querySelectorAll('#tblSermons tbody .sermon-action-download').length,
+                                pdfButtons: document.querySelectorAll('#tblSermons tbody .sermon-action-pdf').length,
+                                firstRowButtons: firstActionCell
+                                    ? [...firstActionCell.querySelectorAll('button')].map((button) => button.className)
+                                    : [],
+                            });
+                        }, 250);
+                    }, 250);
+                });
+            `).then((result) => {
+                logger.info(`Smoke test speaker load result: ${ JSON.stringify(result) }`);
+            }).catch((error) => {
+                logger.error(`Smoke test failed: ${ error }`);
+            }).finally(() => {
+                setTimeout(() => app.quit(), 500);
+            });
+        });
+    }
+
+    // Custom App Menu
+    const menu = Menu.buildFromTemplate([
     {
         label: 'Menu',
             submenu: [
@@ -52,7 +125,11 @@ function createWindow() {
                     // We can not access window.localStorage from our main process, so we are forced to use this workaround if we don't want to resort to using a file
                     window.webContents.executeJavaScript(`window.localStorage.getItem('sermon-download-path')`).then(path => {
                         if (path) { 
-                            shell.openPath(path) 
+                            shell.openPath(path).then(errorMessage => {
+                                if (errorMessage) {
+                                    dialog.showMessageBox(window, { message: errorMessage });
+                                }
+                            });
                         } else {
                             dialog.showMessageBox(window, { message: 'Failed to open path because it has not been saved to storage.' })
                         }
@@ -63,16 +140,14 @@ function createWindow() {
             {
                 label:'Change Download Directory',
                 click(){
-                    dialog.showOpenDialog({ 
+                    dialog.showOpenDialog(window, {
                         properties: ['openDirectory'] 
                     }).then(result => {
                         if (result.canceled) { return; }
 
                         // We can not access window.localStorage from our main process, so we are forced to use this workaround if we don't want to resort to using a file
-                        // Escape the file path so JS doesnt eat the \
-
-                        let path = result.filePaths[0].replaceAll('\\', '\\\\') 
-                        window.webContents.executeJavaScript(`window.localStorage.setItem("sermon-download-path", "${ path }"); OnPathUpdate();`).then(() => {
+                        const selectedPath = JSON.stringify(result.filePaths[0]);
+                        window.webContents.executeJavaScript(`window.localStorage.setItem("sermon-download-path", ${selectedPath}); if (typeof OnPathUpdate === "function") { OnPathUpdate(); }`).then(() => {
                             dialog.showMessageBox(window, { message: 'Successfully set new download path! Please restart program.' })
                         })
                     })
@@ -96,20 +171,23 @@ function createWindow() {
     }
   ]) 
   Menu.setApplicationMenu(menu); 
-    // window.setMenu(null);
+
     window.loadFile('index2.html');
-    //console.log(screen.getPrimaryDisplay());
-    //console.log(os.platform());
 }
 
-app.on('ready',createWindow);
+app.whenReady().then(createWindow);
+
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
+    }
+});
 
 //Quit the app (main process) when all windows are closed
 app.on('window-all-closed', () => {
-    app.quit();
-    // if (process.platform != 'darwin'){
-    //     app.quit();
-    // }
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
 });
 
 /* DEPRECATED CODE
